@@ -10,7 +10,7 @@
 [![GolangCI Lint](https://github.com/dmitrymomot/mailer/actions/workflows/golangci-lint.yml/badge.svg)](https://github.com/dmitrymomot/mailer/actions/workflows/golangci-lint.yml)
 [![Go Report Card](https://goreportcard.com/badge/github.com/dmitrymomot/mailer)](https://goreportcard.com/report/github.com/dmitrymomot/mailer)
 
-Mailer is an email queue processor.  it's a robust and scalable system designed for efficient email handling in distributed environments. It offers a seamless integration with various email providers, ensuring reliable delivery of queued emails.
+Mailer is an email queue processor that exemplifies provider-agnostic versatility in its design. It's a robust and scalable system tailored for efficient email handling in distributed environments. While maintaining a neutral stance towards various email providers ensuring adaptability and flexibility, Mailer includes a basic adapter implementation for the Postmarkapp email service that can be an example for your implementations or help you to start quickly.
 
 ## Usage
 
