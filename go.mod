@@ -1,6 +1,6 @@
 module github.com/dmitrymomot/mailer
 
-go 1.21.4
+go 1.21
 
 require (
 	github.com/hibiken/asynq v0.24.1

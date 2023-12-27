@@ -1,6 +1,6 @@
 module mailer_example
 
-go 1.21.4
+go 1.21
 
 require (
 	github.com/dmitrymomot/asyncer v0.1.1
