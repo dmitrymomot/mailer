@@ -5,6 +5,7 @@ package mocks_mailer
 import (
 	context "context"
 
+	"braces.dev/errtrace"
 	mock "github.com/stretchr/testify/mock"
 )
 
@@ -36,7 +37,7 @@ func (_m *MockworkerEnqueuer) EnqueueTask(ctx context.Context, taskName string, 
 		r0 = ret.Error(0)
 	}
 
-	return r0
+	return errtrace.Wrap(r0)
 }
 
 // MockworkerEnqueuer_EnqueueTask_Call is a *mock.Call that shadows Run/Return methods with type explicit version for method 'EnqueueTask'

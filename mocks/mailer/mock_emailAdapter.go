@@ -5,6 +5,7 @@ package mocks_mailer
 import (
 	context "context"
 
+	"braces.dev/errtrace"
 	mailer "github.com/dmitrymomot/mailer"
 	mock "github.com/stretchr/testify/mock"
 )
@@ -37,7 +38,7 @@ func (_m *MockemailAdapter) SendEmail(ctx context.Context, payload mailer.SendEm
 		r0 = ret.Error(0)
 	}
 
-	return r0
+	return errtrace.Wrap(r0)
 }
 
 // MockemailAdapter_SendEmail_Call is a *mock.Call that shadows Run/Return methods with type explicit version for method 'SendEmail'

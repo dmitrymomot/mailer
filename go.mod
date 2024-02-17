@@ -3,6 +3,7 @@ module github.com/dmitrymomot/mailer
 go 1.21
 
 require (
+	braces.dev/errtrace v0.3.0
 	github.com/dmitrymomot/asyncer v0.3.1
 	github.com/mrz1836/postmark v1.6.1
 	github.com/stretchr/testify v1.7.0

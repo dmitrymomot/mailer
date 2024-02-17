@@ -30,6 +30,8 @@ tasks:
     cmds:
       - echo "Adding errtrace to generated files..."
       - errtrace -w ./...
+      - go mod tidy
+      - echo "Done."
 
   install:
     desc: Install dependencies for local development.
@@ -73,6 +75,8 @@ tasks:
       - templ fmt template/
       - echo "Generating go template components from templ files..."
       - templ generate template/
+      - task: errtrace
+      - go mod tidy
       - echo "Done."
     sources:
       - template/**/*.templ
@@ -81,6 +85,7 @@ tasks:
 
   mock:
     desc: Generate mocks for repository interfaces.
+    summary: "Mockery (mocks generator) is required. Run `task install` to install it. See documentation for more details https://vektra.github.io/mockery/latest/"
     aliases:
       - mock
       - gen-mocks
@@ -88,4 +93,5 @@ tasks:
     dir: ./
     cmds:
       - mockery
+      - task: errtrace
       - go mod tidy

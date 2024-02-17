@@ -4,6 +4,7 @@ import (
 	"context"
 	"errors"
 
+	"braces.dev/errtrace"
 	"github.com/dmitrymomot/asyncer"
 )
 
@@ -28,7 +29,7 @@ type (
 func SendEmailHandler(mail emailAdapter) asyncer.TaskHandler {
 	return asyncer.HandlerFunc(SendEmailTask, func(ctx context.Context, payload SendEmailPayload) error {
 		if err := mail.SendEmail(ctx, payload); err != nil {
-			return errors.Join(ErrFailedToSendEmail, err)
+			return errtrace.Wrap(errors.Join(ErrFailedToSendEmail, err))
 		}
 		return nil
 	})

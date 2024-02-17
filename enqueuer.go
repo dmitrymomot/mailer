@@ -1,6 +1,7 @@
 package mailer
 
 import (
+	"braces.dev/errtrace"
 	"context"
 	"errors"
 )
@@ -30,12 +31,12 @@ func NewEnqueuer(e workerEnqueuer) *Enqueuer {
 func (e *Enqueuer) SendEmail(ctx context.Context, payload SendEmailPayload) error {
 	// Validate the payload
 	if err := payload.Validate(); err != nil {
-		return errors.Join(ErrFailedToEnqueueTask, err)
+		return errtrace.Wrap(errors.Join(ErrFailedToEnqueueTask, err))
 	}
 
 	// Enqueue the task
 	if err := e.queue.EnqueueTask(ctx, SendEmailTask, payload); err != nil {
-		return errors.Join(ErrFailedToEnqueueTask, err)
+		return errtrace.Wrap(errors.Join(ErrFailedToEnqueueTask, err))
 	}
 
 	return nil

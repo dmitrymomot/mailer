@@ -5,6 +5,7 @@ import (
 	"errors"
 	"fmt"
 
+	"braces.dev/errtrace"
 	"github.com/dmitrymomot/mailer"
 	"github.com/mrz1836/postmark"
 )
@@ -32,7 +33,7 @@ type (
 // Validate the config
 func (c Config) Validate() error {
 	if c.From == "" {
-		return ErrMissingFromEmail
+		return errtrace.Wrap(ErrMissingFromEmail)
 	}
 	return nil
 }
@@ -41,10 +42,10 @@ func (c Config) Validate() error {
 // returns a new instance of the Client interface implementation
 func New(serverToken, accountToken string, conf Config) (*Client, error) {
 	if err := conf.Validate(); err != nil {
-		return nil, errors.Join(ErrFailedToCreateClient, err)
+		return nil, errtrace.Wrap(errors.Join(ErrFailedToCreateClient, err))
 	}
 	if serverToken == "" || accountToken == "" {
-		return nil, errors.Join(ErrFailedToCreateClient, ErrMissingCredentials)
+		return nil, errtrace.Wrap(errors.Join(ErrFailedToCreateClient, ErrMissingCredentials))
 	}
 	if conf.ReplyTo == "" {
 		conf.ReplyTo = conf.From
@@ -97,10 +98,10 @@ func (c *Client) SendEmail(ctx context.Context, payload mailer.SendEmailPayload)
 	// Send the email
 	resp, err := c.client.SendEmail(ctx, e)
 	if err != nil {
-		return errors.Join(ErrFailedToSendEmail, err)
+		return errtrace.Wrap(errors.Join(ErrFailedToSendEmail, err))
 	}
 	if resp.ErrorCode > 0 {
-		return errors.Join(ErrFailedToSendEmail, fmt.Errorf("%v %s", resp.ErrorCode, resp.Message))
+		return errtrace.Wrap(errors.Join(ErrFailedToSendEmail, fmt.Errorf("%v %s", resp.ErrorCode, resp.Message)))
 	}
 
 	return nil
