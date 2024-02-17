@@ -1,0 +1,21 @@
+package mailer_template
+
+templ Alert(text string) {
+	<table cellpadding="0" cellspacing="0" role="presentation" width="100%">
+		<tr>
+			<td bgcolor="#0099E5" style="color: #FFFFFF; padding: 16px 32px;">
+				{ text }
+			</td>
+		</tr>
+	</table>
+}
+
+templ AlertOutlined(text string) {
+	<table cellpadding="0" cellspacing="0" role="presentation" width="100%" style="border: 2px solid #0099E5;">
+		<tr>
+			<td style="color: #0099E5; padding: 16px 32px;">
+				{ text }
+			</td>
+		</tr>
+	</table>
+}
