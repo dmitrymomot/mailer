@@ -27,7 +27,22 @@ const (
 	ButtonColorDanger    ButtonColor = "#f43f5e" // Red
 )
 
-func Button(color ButtonColor, label, link string) templ.Component {
+// ButtonAlign represents the alignment of the button
+type ButtonAlign string
+
+// String returns the string representation of the button alignment
+func (a ButtonAlign) String() string {
+	return string(a)
+}
+
+// Predefined button alignments
+const (
+	ButtonAlignLeft   ButtonAlign = "left"
+	ButtonAlignCenter ButtonAlign = "center"
+	ButtonAlignRight  ButtonAlign = "right"
+)
+
+func Button(color ButtonColor, align ButtonAlign, label, link string) templ.Component {
 	return templ.ComponentFunc(func(ctx context.Context, templ_7745c5c3_W io.Writer) (templ_7745c5c3_Err error) {
 		templ_7745c5c3_Buffer, templ_7745c5c3_IsBuffer := templ_7745c5c3_W.(*bytes.Buffer)
 		if !templ_7745c5c3_IsBuffer {
@@ -40,7 +55,24 @@ func Button(color ButtonColor, label, link string) templ.Component {
 			templ_7745c5c3_Var1 = templ.NopComponent
 		}
 		ctx = templ.ClearChildren(ctx)
-		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<!-- Default --><table align=\"center\" cellpadding=\"0\" cellspacing=\"0\" role=\"presentation\" style=\"margin: 0 auto;\"><tr><th bgcolor=\"")
+		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<!-- Custom: center-aligned on mobile only -->")
+		if templ_7745c5c3_Err != nil {
+			return errtrace.Wrap(templ_7745c5c3_Err)
+		}
+		var templ_7745c5c3_Var2 = []any{align.String()}
+		templ_7745c5c3_Err = templ.RenderCSSItems(ctx, templ_7745c5c3_Buffer, templ_7745c5c3_Var2...)
+		if templ_7745c5c3_Err != nil {
+			return errtrace.Wrap(templ_7745c5c3_Err)
+		}
+		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<table class=\"")
+		if templ_7745c5c3_Err != nil {
+			return errtrace.Wrap(templ_7745c5c3_Err)
+		}
+		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ.CSSClasses(templ_7745c5c3_Var2).String()))
+		if templ_7745c5c3_Err != nil {
+			return errtrace.Wrap(templ_7745c5c3_Err)
+		}
+		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("\" cellpadding=\"0\" cellspacing=\"0\" role=\"presentation\" style=\"margin: 0 auto;\"><tr><th bgcolor=\"")
 		if templ_7745c5c3_Err != nil {
 			return errtrace.Wrap(templ_7745c5c3_Err)
 		}
@@ -52,8 +84,8 @@ func Button(color ButtonColor, label, link string) templ.Component {
 		if templ_7745c5c3_Err != nil {
 			return errtrace.Wrap(templ_7745c5c3_Err)
 		}
-		var templ_7745c5c3_Var2 templ.SafeURL = templ.URL(link)
-		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(string(templ_7745c5c3_Var2)))
+		var templ_7745c5c3_Var3 templ.SafeURL = templ.URL(link)
+		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(string(templ_7745c5c3_Var3)))
 		if templ_7745c5c3_Err != nil {
 			return errtrace.Wrap(templ_7745c5c3_Err)
 		}
@@ -61,42 +93,12 @@ func Button(color ButtonColor, label, link string) templ.Component {
 		if templ_7745c5c3_Err != nil {
 			return errtrace.Wrap(templ_7745c5c3_Err)
 		}
-		var templ_7745c5c3_Var3 string
-		templ_7745c5c3_Var3, templ_7745c5c3_Err = templ.JoinStringErrs(label)
+		var templ_7745c5c3_Var4 string
+		templ_7745c5c3_Var4, templ_7745c5c3_Err = templ.JoinStringErrs(label)
 		if templ_7745c5c3_Err != nil {
-			return errtrace.Wrap(templ.Error{Err: templ_7745c5c3_Err, FileName: `template/button.templ`, Line: 23, Col: 165})
+			return errtrace.Wrap(templ.Error{Err: templ_7745c5c3_Err, FileName: `template/button.templ`, Line: 38, Col: 165})
 		}
-		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var3))
-		if templ_7745c5c3_Err != nil {
-			return errtrace.Wrap(templ_7745c5c3_Err)
-		}
-		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("</a></th></tr></table><!-- Custom: center-aligned on mobile only --><table class=\"align-sm-center\" cellpadding=\"0\" cellspacing=\"0\" role=\"presentation\"><tr><th bgcolor=\"")
-		if templ_7745c5c3_Err != nil {
-			return errtrace.Wrap(templ_7745c5c3_Err)
-		}
-		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(color.String()))
-		if templ_7745c5c3_Err != nil {
-			return errtrace.Wrap(templ_7745c5c3_Err)
-		}
-		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("\" style=\"border-radius: 3px; mso-padding-alt: 6px 42px 12px;\"><a href=\"")
-		if templ_7745c5c3_Err != nil {
-			return errtrace.Wrap(templ_7745c5c3_Err)
-		}
-		var templ_7745c5c3_Var4 templ.SafeURL = templ.URL(link)
-		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(string(templ_7745c5c3_Var4)))
-		if templ_7745c5c3_Err != nil {
-			return errtrace.Wrap(templ_7745c5c3_Err)
-		}
-		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("\" style=\"color: #FFFFFF; display: inline-block; font-size: 13px; line-height: 100%; padding: 12px 42px; text-decoration: none;\">")
-		if templ_7745c5c3_Err != nil {
-			return errtrace.Wrap(templ_7745c5c3_Err)
-		}
-		var templ_7745c5c3_Var5 string
-		templ_7745c5c3_Var5, templ_7745c5c3_Err = templ.JoinStringErrs(label)
-		if templ_7745c5c3_Err != nil {
-			return errtrace.Wrap(templ.Error{Err: templ_7745c5c3_Err, FileName: `template/button.templ`, Line: 31, Col: 165})
-		}
-		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var5))
+		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var4))
 		if templ_7745c5c3_Err != nil {
 			return errtrace.Wrap(templ_7745c5c3_Err)
 		}
@@ -111,7 +113,31 @@ func Button(color ButtonColor, label, link string) templ.Component {
 	})
 }
 
-func ButtonPrimary(label, link string) templ.Component {
+func ButtonPrimary(align ButtonAlign, label, link string) templ.Component {
+	return templ.ComponentFunc(func(ctx context.Context, templ_7745c5c3_W io.Writer) (templ_7745c5c3_Err error) {
+		templ_7745c5c3_Buffer, templ_7745c5c3_IsBuffer := templ_7745c5c3_W.(*bytes.Buffer)
+		if !templ_7745c5c3_IsBuffer {
+			templ_7745c5c3_Buffer = templ.GetBuffer()
+			defer templ.ReleaseBuffer(templ_7745c5c3_Buffer)
+		}
+		ctx = templ.InitializeContext(ctx)
+		templ_7745c5c3_Var5 := templ.GetChildren(ctx)
+		if templ_7745c5c3_Var5 == nil {
+			templ_7745c5c3_Var5 = templ.NopComponent
+		}
+		ctx = templ.ClearChildren(ctx)
+		templ_7745c5c3_Err = Button(ButtonColorPrimary, align, label, link).Render(ctx, templ_7745c5c3_Buffer)
+		if templ_7745c5c3_Err != nil {
+			return errtrace.Wrap(templ_7745c5c3_Err)
+		}
+		if !templ_7745c5c3_IsBuffer {
+			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteTo(templ_7745c5c3_W)
+		}
+		return errtrace.Wrap(templ_7745c5c3_Err)
+	})
+}
+
+func ButtonSecondary(align ButtonAlign, label, link string) templ.Component {
 	return templ.ComponentFunc(func(ctx context.Context, templ_7745c5c3_W io.Writer) (templ_7745c5c3_Err error) {
 		templ_7745c5c3_Buffer, templ_7745c5c3_IsBuffer := templ_7745c5c3_W.(*bytes.Buffer)
 		if !templ_7745c5c3_IsBuffer {
@@ -124,7 +150,7 @@ func ButtonPrimary(label, link string) templ.Component {
 			templ_7745c5c3_Var6 = templ.NopComponent
 		}
 		ctx = templ.ClearChildren(ctx)
-		templ_7745c5c3_Err = Button(ButtonColorPrimary, label, link).Render(ctx, templ_7745c5c3_Buffer)
+		templ_7745c5c3_Err = Button(ButtonColorSecondary, align, label, link).Render(ctx, templ_7745c5c3_Buffer)
 		if templ_7745c5c3_Err != nil {
 			return errtrace.Wrap(templ_7745c5c3_Err)
 		}
@@ -135,7 +161,7 @@ func ButtonPrimary(label, link string) templ.Component {
 	})
 }
 
-func ButtonSecondary(label, link string) templ.Component {
+func ButtonSuccess(align ButtonAlign, label, link string) templ.Component {
 	return templ.ComponentFunc(func(ctx context.Context, templ_7745c5c3_W io.Writer) (templ_7745c5c3_Err error) {
 		templ_7745c5c3_Buffer, templ_7745c5c3_IsBuffer := templ_7745c5c3_W.(*bytes.Buffer)
 		if !templ_7745c5c3_IsBuffer {
@@ -148,7 +174,7 @@ func ButtonSecondary(label, link string) templ.Component {
 			templ_7745c5c3_Var7 = templ.NopComponent
 		}
 		ctx = templ.ClearChildren(ctx)
-		templ_7745c5c3_Err = Button(ButtonColorSecondary, label, link).Render(ctx, templ_7745c5c3_Buffer)
+		templ_7745c5c3_Err = Button(ButtonColorSuccess, align, label, link).Render(ctx, templ_7745c5c3_Buffer)
 		if templ_7745c5c3_Err != nil {
 			return errtrace.Wrap(templ_7745c5c3_Err)
 		}
@@ -159,7 +185,7 @@ func ButtonSecondary(label, link string) templ.Component {
 	})
 }
 
-func ButtonSuccess(label, link string) templ.Component {
+func ButtonDanger(align ButtonAlign, label, link string) templ.Component {
 	return templ.ComponentFunc(func(ctx context.Context, templ_7745c5c3_W io.Writer) (templ_7745c5c3_Err error) {
 		templ_7745c5c3_Buffer, templ_7745c5c3_IsBuffer := templ_7745c5c3_W.(*bytes.Buffer)
 		if !templ_7745c5c3_IsBuffer {
@@ -172,7 +198,7 @@ func ButtonSuccess(label, link string) templ.Component {
 			templ_7745c5c3_Var8 = templ.NopComponent
 		}
 		ctx = templ.ClearChildren(ctx)
-		templ_7745c5c3_Err = Button(ButtonColorSuccess, label, link).Render(ctx, templ_7745c5c3_Buffer)
+		templ_7745c5c3_Err = Button(ButtonColorDanger, align, label, link).Render(ctx, templ_7745c5c3_Buffer)
 		if templ_7745c5c3_Err != nil {
 			return errtrace.Wrap(templ_7745c5c3_Err)
 		}
@@ -183,7 +209,7 @@ func ButtonSuccess(label, link string) templ.Component {
 	})
 }
 
-func ButtonDanger(label, link string) templ.Component {
+func ButtonOutlinedPrimary(align ButtonAlign, label, link string) templ.Component {
 	return templ.ComponentFunc(func(ctx context.Context, templ_7745c5c3_W io.Writer) (templ_7745c5c3_Err error) {
 		templ_7745c5c3_Buffer, templ_7745c5c3_IsBuffer := templ_7745c5c3_W.(*bytes.Buffer)
 		if !templ_7745c5c3_IsBuffer {
@@ -196,7 +222,37 @@ func ButtonDanger(label, link string) templ.Component {
 			templ_7745c5c3_Var9 = templ.NopComponent
 		}
 		ctx = templ.ClearChildren(ctx)
-		templ_7745c5c3_Err = Button(ButtonColorDanger, label, link).Render(ctx, templ_7745c5c3_Buffer)
+		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<!-- Default --><table align=\"")
+		if templ_7745c5c3_Err != nil {
+			return errtrace.Wrap(templ_7745c5c3_Err)
+		}
+		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(align.String()))
+		if templ_7745c5c3_Err != nil {
+			return errtrace.Wrap(templ_7745c5c3_Err)
+		}
+		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("\" cellpadding=\"0\" cellspacing=\"0\" role=\"presentation\" style=\"margin: 0 auto;\"><tr><th style=\"border: 2px solid #3b82f6; border-radius: 3px; mso-padding-alt: 6px 42px 12px;\"><a href=\"")
+		if templ_7745c5c3_Err != nil {
+			return errtrace.Wrap(templ_7745c5c3_Err)
+		}
+		var templ_7745c5c3_Var10 templ.SafeURL = templ.URL(link)
+		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(string(templ_7745c5c3_Var10)))
+		if templ_7745c5c3_Err != nil {
+			return errtrace.Wrap(templ_7745c5c3_Err)
+		}
+		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("\" style=\"color: #3b82f6; display: inline-block; font-size: 13px; line-height: 100%; padding: 12px 42px; text-decoration: none;\">")
+		if templ_7745c5c3_Err != nil {
+			return errtrace.Wrap(templ_7745c5c3_Err)
+		}
+		var templ_7745c5c3_Var11 string
+		templ_7745c5c3_Var11, templ_7745c5c3_Err = templ.JoinStringErrs(label)
+		if templ_7745c5c3_Err != nil {
+			return errtrace.Wrap(templ.Error{Err: templ_7745c5c3_Err, FileName: `template/button.templ`, Line: 65, Col: 165})
+		}
+		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var11))
+		if templ_7745c5c3_Err != nil {
+			return errtrace.Wrap(templ_7745c5c3_Err)
+		}
+		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("</a></th></tr></table>")
 		if templ_7745c5c3_Err != nil {
 			return errtrace.Wrap(templ_7745c5c3_Err)
 		}
@@ -207,7 +263,7 @@ func ButtonDanger(label, link string) templ.Component {
 	})
 }
 
-func ButtonOutlinedPrimary(label, link string) templ.Component {
+func ButtonOutlinedSecondary(align ButtonAlign, label, link string) templ.Component {
 	return templ.ComponentFunc(func(ctx context.Context, templ_7745c5c3_W io.Writer) (templ_7745c5c3_Err error) {
 		templ_7745c5c3_Buffer, templ_7745c5c3_IsBuffer := templ_7745c5c3_W.(*bytes.Buffer)
 		if !templ_7745c5c3_IsBuffer {
@@ -215,34 +271,20 @@ func ButtonOutlinedPrimary(label, link string) templ.Component {
 			defer templ.ReleaseBuffer(templ_7745c5c3_Buffer)
 		}
 		ctx = templ.InitializeContext(ctx)
-		templ_7745c5c3_Var10 := templ.GetChildren(ctx)
-		if templ_7745c5c3_Var10 == nil {
-			templ_7745c5c3_Var10 = templ.NopComponent
+		templ_7745c5c3_Var12 := templ.GetChildren(ctx)
+		if templ_7745c5c3_Var12 == nil {
+			templ_7745c5c3_Var12 = templ.NopComponent
 		}
 		ctx = templ.ClearChildren(ctx)
-		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<!-- Default --><table align=\"center\" cellpadding=\"0\" cellspacing=\"0\" role=\"presentation\" style=\"margin: 0 auto;\"><tr><th style=\"border: 2px solid #3b82f6; border-radius: 3px; mso-padding-alt: 6px 42px 12px;\"><a href=\"")
+		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<!-- Default --><table align=\"")
 		if templ_7745c5c3_Err != nil {
 			return errtrace.Wrap(templ_7745c5c3_Err)
 		}
-		var templ_7745c5c3_Var11 templ.SafeURL = templ.URL(link)
-		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(string(templ_7745c5c3_Var11)))
+		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(align.String()))
 		if templ_7745c5c3_Err != nil {
 			return errtrace.Wrap(templ_7745c5c3_Err)
 		}
-		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("\" style=\"color: #3b82f6; display: inline-block; font-size: 13px; line-height: 100%; padding: 12px 42px; text-decoration: none;\">")
-		if templ_7745c5c3_Err != nil {
-			return errtrace.Wrap(templ_7745c5c3_Err)
-		}
-		var templ_7745c5c3_Var12 string
-		templ_7745c5c3_Var12, templ_7745c5c3_Err = templ.JoinStringErrs(label)
-		if templ_7745c5c3_Err != nil {
-			return errtrace.Wrap(templ.Error{Err: templ_7745c5c3_Err, FileName: `template/button.templ`, Line: 58, Col: 165})
-		}
-		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var12))
-		if templ_7745c5c3_Err != nil {
-			return errtrace.Wrap(templ_7745c5c3_Err)
-		}
-		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("</a></th></tr></table><!-- Custom: Full width on mobile --><table class=\"align-sm-center\" cellpadding=\"0\" cellspacing=\"0\" role=\"presentation\"><tr><th style=\"border: 2px solid #3b82f6; border-radius: 3px; mso-padding-alt: 6px 42px 12px;\"><a href=\"")
+		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("\" cellpadding=\"0\" cellspacing=\"0\" role=\"presentation\" style=\"margin: 0 auto;\"><tr><th style=\"border: 2px solid #64748b; border-radius: 3px; mso-padding-alt: 6px 42px 12px;\"><a href=\"")
 		if templ_7745c5c3_Err != nil {
 			return errtrace.Wrap(templ_7745c5c3_Err)
 		}
@@ -251,14 +293,14 @@ func ButtonOutlinedPrimary(label, link string) templ.Component {
 		if templ_7745c5c3_Err != nil {
 			return errtrace.Wrap(templ_7745c5c3_Err)
 		}
-		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("\" class=\"col\" style=\"color: #3b82f6; display: inline-block; font-size: 13px; line-height: 100%; padding: 12px 42px; text-decoration: none;\">")
+		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("\" style=\"color: #64748b; display: inline-block; font-size: 13px; line-height: 100%; padding: 12px 42px; text-decoration: none;\">")
 		if templ_7745c5c3_Err != nil {
 			return errtrace.Wrap(templ_7745c5c3_Err)
 		}
 		var templ_7745c5c3_Var14 string
 		templ_7745c5c3_Var14, templ_7745c5c3_Err = templ.JoinStringErrs(label)
 		if templ_7745c5c3_Err != nil {
-			return errtrace.Wrap(templ.Error{Err: templ_7745c5c3_Err, FileName: `template/button.templ`, Line: 66, Col: 177})
+			return errtrace.Wrap(templ.Error{Err: templ_7745c5c3_Err, FileName: `template/button.templ`, Line: 76, Col: 165})
 		}
 		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var14))
 		if templ_7745c5c3_Err != nil {
@@ -275,7 +317,7 @@ func ButtonOutlinedPrimary(label, link string) templ.Component {
 	})
 }
 
-func ButtonOutlinedSecondary(label, link string) templ.Component {
+func ButtonOutlinedSuccess(align ButtonAlign, label, link string) templ.Component {
 	return templ.ComponentFunc(func(ctx context.Context, templ_7745c5c3_W io.Writer) (templ_7745c5c3_Err error) {
 		templ_7745c5c3_Buffer, templ_7745c5c3_IsBuffer := templ_7745c5c3_W.(*bytes.Buffer)
 		if !templ_7745c5c3_IsBuffer {
@@ -288,7 +330,15 @@ func ButtonOutlinedSecondary(label, link string) templ.Component {
 			templ_7745c5c3_Var15 = templ.NopComponent
 		}
 		ctx = templ.ClearChildren(ctx)
-		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<!-- Default --><table align=\"center\" cellpadding=\"0\" cellspacing=\"0\" role=\"presentation\" style=\"margin: 0 auto;\"><tr><th style=\"border: 2px solid #64748b; border-radius: 3px; mso-padding-alt: 6px 42px 12px;\"><a href=\"")
+		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<!-- Default --><table align=\"")
+		if templ_7745c5c3_Err != nil {
+			return errtrace.Wrap(templ_7745c5c3_Err)
+		}
+		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(align.String()))
+		if templ_7745c5c3_Err != nil {
+			return errtrace.Wrap(templ_7745c5c3_Err)
+		}
+		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("\" cellpadding=\"0\" cellspacing=\"0\" role=\"presentation\" style=\"margin: 0 auto;\"><tr><th style=\"border: 2px solid #22c55e; border-radius: 3px; mso-padding-alt: 6px 42px 12px;\"><a href=\"")
 		if templ_7745c5c3_Err != nil {
 			return errtrace.Wrap(templ_7745c5c3_Err)
 		}
@@ -297,41 +347,19 @@ func ButtonOutlinedSecondary(label, link string) templ.Component {
 		if templ_7745c5c3_Err != nil {
 			return errtrace.Wrap(templ_7745c5c3_Err)
 		}
-		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("\" style=\"color: #64748b; display: inline-block; font-size: 13px; line-height: 100%; padding: 12px 42px; text-decoration: none;\">")
+		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("\" style=\"color: #22c55e; display: inline-block; font-size: 13px; line-height: 100%; padding: 12px 42px; text-decoration: none;\">")
 		if templ_7745c5c3_Err != nil {
 			return errtrace.Wrap(templ_7745c5c3_Err)
 		}
 		var templ_7745c5c3_Var17 string
 		templ_7745c5c3_Var17, templ_7745c5c3_Err = templ.JoinStringErrs(label)
 		if templ_7745c5c3_Err != nil {
-			return errtrace.Wrap(templ.Error{Err: templ_7745c5c3_Err, FileName: `template/button.templ`, Line: 77, Col: 165})
+			return errtrace.Wrap(templ.Error{Err: templ_7745c5c3_Err, FileName: `template/button.templ`, Line: 87, Col: 165})
 		}
 		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var17))
 		if templ_7745c5c3_Err != nil {
 			return errtrace.Wrap(templ_7745c5c3_Err)
 		}
-		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("</a></th></tr></table><!-- Custom: Full width on mobile --><table class=\"align-sm-center\" cellpadding=\"0\" cellspacing=\"0\" role=\"presentation\"><tr><th style=\"border: 2px solid #64748b; border-radius: 3px; mso-padding-alt: 6px 42px 12px;\"><a href=\"")
-		if templ_7745c5c3_Err != nil {
-			return errtrace.Wrap(templ_7745c5c3_Err)
-		}
-		var templ_7745c5c3_Var18 templ.SafeURL = templ.URL(link)
-		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(string(templ_7745c5c3_Var18)))
-		if templ_7745c5c3_Err != nil {
-			return errtrace.Wrap(templ_7745c5c3_Err)
-		}
-		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("\" class=\"col\" style=\"color: #64748b; display: inline-block; font-size: 13px; line-height: 100%; padding: 12px 42px; text-decoration: none;\">")
-		if templ_7745c5c3_Err != nil {
-			return errtrace.Wrap(templ_7745c5c3_Err)
-		}
-		var templ_7745c5c3_Var19 string
-		templ_7745c5c3_Var19, templ_7745c5c3_Err = templ.JoinStringErrs(label)
-		if templ_7745c5c3_Err != nil {
-			return errtrace.Wrap(templ.Error{Err: templ_7745c5c3_Err, FileName: `template/button.templ`, Line: 85, Col: 177})
-		}
-		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var19))
-		if templ_7745c5c3_Err != nil {
-			return errtrace.Wrap(templ_7745c5c3_Err)
-		}
 		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("</a></th></tr></table>")
 		if templ_7745c5c3_Err != nil {
 			return errtrace.Wrap(templ_7745c5c3_Err)
@@ -343,7 +371,7 @@ func ButtonOutlinedSecondary(label, link string) templ.Component {
 	})
 }
 
-func ButtonOutlinedSuccess(label, link string) templ.Component {
+func ButtonOutlinedDanger(align ButtonAlign, label, link string) templ.Component {
 	return templ.ComponentFunc(func(ctx context.Context, templ_7745c5c3_W io.Writer) (templ_7745c5c3_Err error) {
 		templ_7745c5c3_Buffer, templ_7745c5c3_IsBuffer := templ_7745c5c3_W.(*bytes.Buffer)
 		if !templ_7745c5c3_IsBuffer {
@@ -351,85 +379,25 @@ func ButtonOutlinedSuccess(label, link string) templ.Component {
 			defer templ.ReleaseBuffer(templ_7745c5c3_Buffer)
 		}
 		ctx = templ.InitializeContext(ctx)
-		templ_7745c5c3_Var20 := templ.GetChildren(ctx)
-		if templ_7745c5c3_Var20 == nil {
-			templ_7745c5c3_Var20 = templ.NopComponent
+		templ_7745c5c3_Var18 := templ.GetChildren(ctx)
+		if templ_7745c5c3_Var18 == nil {
+			templ_7745c5c3_Var18 = templ.NopComponent
 		}
 		ctx = templ.ClearChildren(ctx)
-		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<!-- Default --><table align=\"center\" cellpadding=\"0\" cellspacing=\"0\" role=\"presentation\" style=\"margin: 0 auto;\"><tr><th style=\"border: 2px solid #22c55e; border-radius: 3px; mso-padding-alt: 6px 42px 12px;\"><a href=\"")
+		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<!-- Default --><table align=\"")
 		if templ_7745c5c3_Err != nil {
 			return errtrace.Wrap(templ_7745c5c3_Err)
 		}
-		var templ_7745c5c3_Var21 templ.SafeURL = templ.URL(link)
-		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(string(templ_7745c5c3_Var21)))
+		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(align.String()))
 		if templ_7745c5c3_Err != nil {
 			return errtrace.Wrap(templ_7745c5c3_Err)
 		}
-		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("\" style=\"color: #22c55e; display: inline-block; font-size: 13px; line-height: 100%; padding: 12px 42px; text-decoration: none;\">")
+		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("\" cellpadding=\"0\" cellspacing=\"0\" role=\"presentation\" style=\"margin: 0 auto;\"><tr><th style=\"border: 2px solid #f43f5e; border-radius: 3px; mso-padding-alt: 6px 42px 12px;\"><a href=\"")
 		if templ_7745c5c3_Err != nil {
 			return errtrace.Wrap(templ_7745c5c3_Err)
 		}
-		var templ_7745c5c3_Var22 string
-		templ_7745c5c3_Var22, templ_7745c5c3_Err = templ.JoinStringErrs(label)
-		if templ_7745c5c3_Err != nil {
-			return errtrace.Wrap(templ.Error{Err: templ_7745c5c3_Err, FileName: `template/button.templ`, Line: 96, Col: 165})
-		}
-		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var22))
-		if templ_7745c5c3_Err != nil {
-			return errtrace.Wrap(templ_7745c5c3_Err)
-		}
-		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("</a></th></tr></table><!-- Custom: Full width on mobile --><table class=\"align-sm-center\" cellpadding=\"0\" cellspacing=\"0\" role=\"presentation\"><tr><th style=\"border: 2px solid #22c55e; border-radius: 3px; mso-padding-alt: 6px 42px 12px;\"><a href=\"")
-		if templ_7745c5c3_Err != nil {
-			return errtrace.Wrap(templ_7745c5c3_Err)
-		}
-		var templ_7745c5c3_Var23 templ.SafeURL = templ.URL(link)
-		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(string(templ_7745c5c3_Var23)))
-		if templ_7745c5c3_Err != nil {
-			return errtrace.Wrap(templ_7745c5c3_Err)
-		}
-		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("\" class=\"col\" style=\"color: #22c55e; display: inline-block; font-size: 13px; line-height: 100%; padding: 12px 42px; text-decoration: none;\">")
-		if templ_7745c5c3_Err != nil {
-			return errtrace.Wrap(templ_7745c5c3_Err)
-		}
-		var templ_7745c5c3_Var24 string
-		templ_7745c5c3_Var24, templ_7745c5c3_Err = templ.JoinStringErrs(label)
-		if templ_7745c5c3_Err != nil {
-			return errtrace.Wrap(templ.Error{Err: templ_7745c5c3_Err, FileName: `template/button.templ`, Line: 104, Col: 177})
-		}
-		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var24))
-		if templ_7745c5c3_Err != nil {
-			return errtrace.Wrap(templ_7745c5c3_Err)
-		}
-		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("</a></th></tr></table>")
-		if templ_7745c5c3_Err != nil {
-			return errtrace.Wrap(templ_7745c5c3_Err)
-		}
-		if !templ_7745c5c3_IsBuffer {
-			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteTo(templ_7745c5c3_W)
-		}
-		return errtrace.Wrap(templ_7745c5c3_Err)
-	})
-}
-
-func ButtonOutlinedDanger(label, link string) templ.Component {
-	return templ.ComponentFunc(func(ctx context.Context, templ_7745c5c3_W io.Writer) (templ_7745c5c3_Err error) {
-		templ_7745c5c3_Buffer, templ_7745c5c3_IsBuffer := templ_7745c5c3_W.(*bytes.Buffer)
-		if !templ_7745c5c3_IsBuffer {
-			templ_7745c5c3_Buffer = templ.GetBuffer()
-			defer templ.ReleaseBuffer(templ_7745c5c3_Buffer)
-		}
-		ctx = templ.InitializeContext(ctx)
-		templ_7745c5c3_Var25 := templ.GetChildren(ctx)
-		if templ_7745c5c3_Var25 == nil {
-			templ_7745c5c3_Var25 = templ.NopComponent
-		}
-		ctx = templ.ClearChildren(ctx)
-		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<!-- Default --><table align=\"center\" cellpadding=\"0\" cellspacing=\"0\" role=\"presentation\" style=\"margin: 0 auto;\"><tr><th style=\"border: 2px solid #f43f5e; border-radius: 3px; mso-padding-alt: 6px 42px 12px;\"><a href=\"")
-		if templ_7745c5c3_Err != nil {
-			return errtrace.Wrap(templ_7745c5c3_Err)
-		}
-		var templ_7745c5c3_Var26 templ.SafeURL = templ.URL(link)
-		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(string(templ_7745c5c3_Var26)))
+		var templ_7745c5c3_Var19 templ.SafeURL = templ.URL(link)
+		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(string(templ_7745c5c3_Var19)))
 		if templ_7745c5c3_Err != nil {
 			return errtrace.Wrap(templ_7745c5c3_Err)
 		}
@@ -437,34 +405,12 @@ func ButtonOutlinedDanger(label, link string) templ.Component {
 		if templ_7745c5c3_Err != nil {
 			return errtrace.Wrap(templ_7745c5c3_Err)
 		}
-		var templ_7745c5c3_Var27 string
-		templ_7745c5c3_Var27, templ_7745c5c3_Err = templ.JoinStringErrs(label)
+		var templ_7745c5c3_Var20 string
+		templ_7745c5c3_Var20, templ_7745c5c3_Err = templ.JoinStringErrs(label)
 		if templ_7745c5c3_Err != nil {
-			return errtrace.Wrap(templ.Error{Err: templ_7745c5c3_Err, FileName: `template/button.templ`, Line: 115, Col: 165})
+			return errtrace.Wrap(templ.Error{Err: templ_7745c5c3_Err, FileName: `template/button.templ`, Line: 98, Col: 165})
 		}
-		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var27))
-		if templ_7745c5c3_Err != nil {
-			return errtrace.Wrap(templ_7745c5c3_Err)
-		}
-		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("</a></th></tr></table><!-- Custom: Full width on mobile --><table class=\"align-sm-center\" cellpadding=\"0\" cellspacing=\"0\" role=\"presentation\"><tr><th style=\"border: 2px solid #f43f5e; border-radius: 3px; mso-padding-alt: 6px 42px 12px;\"><a href=\"")
-		if templ_7745c5c3_Err != nil {
-			return errtrace.Wrap(templ_7745c5c3_Err)
-		}
-		var templ_7745c5c3_Var28 templ.SafeURL = templ.URL(link)
-		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(string(templ_7745c5c3_Var28)))
-		if templ_7745c5c3_Err != nil {
-			return errtrace.Wrap(templ_7745c5c3_Err)
-		}
-		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("\" class=\"col\" style=\"color: #f43f5e; display: inline-block; font-size: 13px; line-height: 100%; padding: 12px 42px; text-decoration: none;\">")
-		if templ_7745c5c3_Err != nil {
-			return errtrace.Wrap(templ_7745c5c3_Err)
-		}
-		var templ_7745c5c3_Var29 string
-		templ_7745c5c3_Var29, templ_7745c5c3_Err = templ.JoinStringErrs(label)
-		if templ_7745c5c3_Err != nil {
-			return errtrace.Wrap(templ.Error{Err: templ_7745c5c3_Err, FileName: `template/button.templ`, Line: 123, Col: 177})
-		}
-		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var29))
+		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var20))
 		if templ_7745c5c3_Err != nil {
 			return errtrace.Wrap(templ_7745c5c3_Err)
 		}

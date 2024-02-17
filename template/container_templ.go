@@ -11,7 +11,7 @@ import "io"
 import "bytes"
 import "braces.dev/errtrace"
 
-func Divider() templ.Component {
+func Container(children ...templ.Component) templ.Component {
 	return templ.ComponentFunc(func(ctx context.Context, templ_7745c5c3_W io.Writer) (templ_7745c5c3_Err error) {
 		templ_7745c5c3_Buffer, templ_7745c5c3_IsBuffer := templ_7745c5c3_W.(*bytes.Buffer)
 		if !templ_7745c5c3_IsBuffer {
@@ -24,7 +24,17 @@ func Divider() templ.Component {
 			templ_7745c5c3_Var1 = templ.NopComponent
 		}
 		ctx = templ.ClearChildren(ctx)
-		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<!-- Different height on mobile --><table cellpadding=\"0\" cellspacing=\"0\" role=\"presentation\" width=\"100%\"><tr><td class=\"divider py-sm-10\" style=\"padding: 16px 0;\"><div style=\"background: #d1d5db; height: 1px; line-height: 1px;\">\u200c</div></td></tr></table>")
+		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<table class=\"container\" bgcolor=\"transparent\" cellpadding=\"0\" cellspacing=\"0\" role=\"presentation\" width=\"500\"><tr><td align=\"left\">")
+		if templ_7745c5c3_Err != nil {
+			return errtrace.Wrap(templ_7745c5c3_Err)
+		}
+		for _, child := range children {
+			templ_7745c5c3_Err = child.Render(ctx, templ_7745c5c3_Buffer)
+			if templ_7745c5c3_Err != nil {
+				return errtrace.Wrap(templ_7745c5c3_Err)
+			}
+		}
+		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("</td></tr></table>")
 		if templ_7745c5c3_Err != nil {
 			return errtrace.Wrap(templ_7745c5c3_Err)
 		}

@@ -1,7 +1,7 @@
 package mailer_template
 
 templ Header(header string) {
-	<h1 style="color: #374151; font-weight: 600; margin: 0; margin-bottom: 10px; line-height: 100%; font-size: 24px;">{ header }</h1>
+	<h1 style="color: #374151; font-weight: 600; margin: 20px 0 10px 0; line-height: 100%; font-size: 24px;">{ header }</h1>
 }
 
 templ SubHeader(header string) {
@@ -9,11 +9,11 @@ templ SubHeader(header string) {
 }
 
 templ Paragraph(content string) {
-	<p style="color: #1f2937;">{ content }</p>
+	<p style="color: #1f2937; font-size: 14px; line-height: 140%;">{ content }</p>
 }
 
 templ ParagraphSecondary(content string) {
-	<p style="color: #4b5563; font-size: 14px;">{ content }</p>
+	<p style="color: #4b5563; font-size: 12px; line-height: 140%;">{ content }</p>
 }
 
 templ Link(url string, content string) {

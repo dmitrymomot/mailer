@@ -2,5 +2,6 @@ go 1.21
 
 use (
 	.
-	./_example
+	./_example/email_queue
+	./_example/email_template
 )

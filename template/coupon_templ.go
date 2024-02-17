@@ -33,7 +33,7 @@ func CouponDashed(coupon Coupon) templ.Component {
 			templ_7745c5c3_Var1 = templ.NopComponent
 		}
 		ctx = templ.ClearChildren(ctx)
-		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<table cellpadding=\"0\" cellspacing=\"0\" role=\"presentation\" width=\"100%\"><tr><td style=\"padding: 0 24px;\"><table cellpadding=\"0\" cellspacing=\"0\" role=\"presentation\" width=\"100%\"><tr><td class=\"col\" align=\"center\" width=\"100%\" style=\"padding: 0 8px;\"><table cellpadding=\"0\" cellspacing=\"0\" role=\"presentation\" width=\"100%\"><tr><td class=\"spacer py-sm-16\" height=\"32\"></td></tr><tr><td class=\"px-sm-8\" align=\"center\" width=\"100%\" style=\"padding: 32px; border: 4px dashed #CCCCCC; color: #000000;\"><table align=\"center\" cellpadding=\"0\" cellspacing=\"0\" role=\"presentation\" style=\"margin: 0 auto;\"><tr><th style=\"font-size: 96px; line-height: 100%; word-break: break-all;\">")
+		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<table cellpadding=\"0\" cellspacing=\"0\" role=\"presentation\" width=\"100%\"><tr><td style=\"padding: 0\"><table cellpadding=\"0\" cellspacing=\"0\" role=\"presentation\" width=\"100%\"><tr><td class=\"col\" align=\"center\" width=\"100%\" style=\"padding: 0;\"><table cellpadding=\"0\" cellspacing=\"0\" role=\"presentation\" width=\"100%\"><tr><td class=\"spacer py-sm-16\" height=\"32\"></td></tr><tr><td class=\"px-sm-8\" align=\"center\" width=\"100%\" style=\"padding: 32px; border: 4px dashed #d1d5db; border-radius: 3px; color: #000000;\"><table align=\"center\" cellpadding=\"0\" cellspacing=\"0\" role=\"presentation\" style=\"margin: 0 auto;\"><tr><th style=\"font-size: 96px; line-height: 100%; word-break: break-all;\">")
 		if templ_7745c5c3_Err != nil {
 			return errtrace.Wrap(templ_7745c5c3_Err)
 		}
@@ -59,7 +59,7 @@ func CouponDashed(coupon Coupon) templ.Component {
 		if templ_7745c5c3_Err != nil {
 			return errtrace.Wrap(templ_7745c5c3_Err)
 		}
-		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("</span></div><div class=\"spacer py-sm-16\" style=\"line-height: 32px;\">\u200c</div><table cellpadding=\"0\" cellspacing=\"0\" role=\"presentation\"><tr><th bgcolor=\"#000000\" style=\"mso-padding-alt: 6px 32px 12px;\"><a href=\"")
+		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("</span></div><div class=\"spacer py-sm-16\" style=\"line-height: 32px;\">\u200c</div><table cellpadding=\"0\" cellspacing=\"0\" role=\"presentation\"><tr><th bgcolor=\"#000000\" style=\"mso-padding-alt: 6px 32px 12px; border-radius: 3px;\"><a href=\"")
 		if templ_7745c5c3_Err != nil {
 			return errtrace.Wrap(templ_7745c5c3_Err)
 		}

@@ -24,7 +24,7 @@ func Alert(text string) templ.Component {
 			templ_7745c5c3_Var1 = templ.NopComponent
 		}
 		ctx = templ.ClearChildren(ctx)
-		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<table cellpadding=\"0\" cellspacing=\"0\" role=\"presentation\" width=\"100%\"><tr><td bgcolor=\"#0099E5\" style=\"color: #FFFFFF; padding: 16px 32px;\">")
+		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<table cellpadding=\"0\" cellspacing=\"0\" role=\"presentation\" width=\"100%\" style=\"border: 2px solid #3b82f6; border-radius: 4px;\"><tr><td bgcolor=\"#3b82f6\" style=\"color: #FFFFFF; padding: 16px 32px;\">")
 		if templ_7745c5c3_Err != nil {
 			return errtrace.Wrap(templ_7745c5c3_Err)
 		}
@@ -61,7 +61,7 @@ func AlertOutlined(text string) templ.Component {
 			templ_7745c5c3_Var3 = templ.NopComponent
 		}
 		ctx = templ.ClearChildren(ctx)
-		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<table cellpadding=\"0\" cellspacing=\"0\" role=\"presentation\" width=\"100%\" style=\"border: 2px solid #0099E5;\"><tr><td style=\"color: #0099E5; padding: 16px 32px;\">")
+		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<table cellpadding=\"0\" cellspacing=\"0\" role=\"presentation\" width=\"100%\" style=\"border: 2px solid #3b82f6;border-radius: 4px;\"><tr><td style=\"color: #2563eb; padding: 16px 32px;\">")
 		if templ_7745c5c3_Err != nil {
 			return errtrace.Wrap(templ_7745c5c3_Err)
 		}

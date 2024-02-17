@@ -24,14 +24,14 @@ func Header(header string) templ.Component {
 			templ_7745c5c3_Var1 = templ.NopComponent
 		}
 		ctx = templ.ClearChildren(ctx)
-		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<h1 style=\"color: #374151; font-weight: 600; margin: 0; margin-bottom: 10px; line-height: 100%; font-size: 24px;\">")
+		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<h1 style=\"color: #374151; font-weight: 600; margin: 20px 0 10px 0; line-height: 100%; font-size: 24px;\">")
 		if templ_7745c5c3_Err != nil {
 			return errtrace.Wrap(templ_7745c5c3_Err)
 		}
 		var templ_7745c5c3_Var2 string
 		templ_7745c5c3_Var2, templ_7745c5c3_Err = templ.JoinStringErrs(header)
 		if templ_7745c5c3_Err != nil {
-			return errtrace.Wrap(templ.Error{Err: templ_7745c5c3_Err, FileName: `template/typography.templ`, Line: 3, Col: 123})
+			return errtrace.Wrap(templ.Error{Err: templ_7745c5c3_Err, FileName: `template/typography.templ`, Line: 3, Col: 114})
 		}
 		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var2))
 		if templ_7745c5c3_Err != nil {
@@ -98,14 +98,14 @@ func Paragraph(content string) templ.Component {
 			templ_7745c5c3_Var5 = templ.NopComponent
 		}
 		ctx = templ.ClearChildren(ctx)
-		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<p style=\"color: #1f2937;\">")
+		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<p style=\"color: #1f2937; font-size: 14px; line-height: 140%;\">")
 		if templ_7745c5c3_Err != nil {
 			return errtrace.Wrap(templ_7745c5c3_Err)
 		}
 		var templ_7745c5c3_Var6 string
 		templ_7745c5c3_Var6, templ_7745c5c3_Err = templ.JoinStringErrs(content)
 		if templ_7745c5c3_Err != nil {
-			return errtrace.Wrap(templ.Error{Err: templ_7745c5c3_Err, FileName: `template/typography.templ`, Line: 11, Col: 37})
+			return errtrace.Wrap(templ.Error{Err: templ_7745c5c3_Err, FileName: `template/typography.templ`, Line: 11, Col: 73})
 		}
 		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var6))
 		if templ_7745c5c3_Err != nil {
@@ -135,14 +135,14 @@ func ParagraphSecondary(content string) templ.Component {
 			templ_7745c5c3_Var7 = templ.NopComponent
 		}
 		ctx = templ.ClearChildren(ctx)
-		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<p style=\"color: #4b5563; font-size: 14px;\">")
+		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<p style=\"color: #4b5563; font-size: 12px; line-height: 140%;\">")
 		if templ_7745c5c3_Err != nil {
 			return errtrace.Wrap(templ_7745c5c3_Err)
 		}
 		var templ_7745c5c3_Var8 string
 		templ_7745c5c3_Var8, templ_7745c5c3_Err = templ.JoinStringErrs(content)
 		if templ_7745c5c3_Err != nil {
-			return errtrace.Wrap(templ.Error{Err: templ_7745c5c3_Err, FileName: `template/typography.templ`, Line: 15, Col: 54})
+			return errtrace.Wrap(templ.Error{Err: templ_7745c5c3_Err, FileName: `template/typography.templ`, Line: 15, Col: 73})
 		}
 		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var8))
 		if templ_7745c5c3_Err != nil {

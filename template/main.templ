@@ -5,7 +5,7 @@ type MainData struct {
 	Preheader string // Add your preheader text here. This will be visible in the inbox preview in some email clients. You can use this to provide a summary of your email. Max 150 characters. It must be a plain text and not contain any HTML tags.
 }
 
-templ Main(data MainData) {
+templ Main(data MainData, children ...templ.Component) {
 	<!DOCTYPE html>
 	<html lang="en" xmlns:v="urn:schemas-microsoft-com:vml" xmlns:o="urn:schemas-microsoft-com:office:office">
 		<head>
@@ -41,7 +41,9 @@ templ Main(data MainData) {
         }
 
         @media (max-width: 632px) {
-        .container {width: 100%!important;}
+          .container {
+            width: 100%!important;
+          }
         }
 
         @media (max-width: 480px) {
@@ -133,23 +135,16 @@ templ Main(data MainData) {
         }
       </style>
 		</head>
-		<body style="margin:0;padding:0;width:100%;word-break:break-word;-webkit-font-smoothing:antialiased;">
-			<div lang="en" style="display:none;">
-				<!-- Add your preheader text here -->
-				{ data.Preheader }
-			</div>
-			<table lang="en" bgcolor="#EEEEEE" cellpadding="16" cellspacing="0" role="presentation" width="100%">
-				<tr>
-					<td align="center">
-						<table class="container" bgcolor="#FFFFFF" cellpadding="0" cellspacing="0" role="presentation" width="600">
-							<tr>
-								<td align="left">
-									{ children... }
-								</td>
-							</tr>
-						</table>
-					</td>
-				</tr>
+		<body style="box-sizing:border-box;margin:0;padding:0;width:100%;word-break:break-word;-webkit-font-smoothing:antialiased;">
+			<div style="display:none;font-size:0;line-height:0;">{ data.Preheader }</div>
+			<table class="wrapper" bgcolor="#e5e7eb" cellpadding="5" cellspacing="5" role="presentation" width="100%">
+				for _, child := range children {
+					<tr>
+						<td align="center">
+							@child
+						</td>
+					</tr>
+				}
 			</table>
 		</body>
 	</html>
