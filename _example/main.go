@@ -27,47 +27,30 @@ func main() {
 	}
 	_ = postmarkAdapter
 
-	// Init client
-	asynqClient, asyncConnOpt, err := asyncer.NewClient(redisConnString)
-	if err != nil {
-		log.Fatal(err)
-	}
-	defer asynqClient.Close()
+	ctx, cancel := context.WithCancel(context.Background())
+	defer cancel()
 
-	// Create a new enqueuer
-	enqueuer := asyncer.NewEnqueuer(
-		asynqClient,
-		asyncer.WithQueueNameEnq(queueName),
-		asyncer.WithTaskDeadline(queueTaskDeadline),
-		asyncer.WithMaxRetry(queueMaxRetry),
-	)
+	eg, _ := errgroup.WithContext(ctx)
 
-	// Init error group
-	eg, _ := errgroup.WithContext(context.Background())
+	// Run a new queue server with redis as the broker.
+	eg.Go(asyncer.RunQueueServer(
+		ctx, redisConnString, nil,
+		// Register a handler for the task.
+		mailer.SendEmailHandler(postmarkAdapter),
+		// ... add more handlers here ...
+	))
 
-	// Queue server
-	{
-		// Create a new queue worker server with the given options
-		queueServer := asyncer.NewQueueServer(
-			asyncConnOpt,
-			asyncer.WithQueueName(queueName),
-			asyncer.WithQueueConcurrency(workerConcurrency),
-		)
-		defer queueServer.Shutdown()
+	// Create a new enqueuer with redis as the broker.
+	enqueuer := asyncer.MustNewEnqueuer(redisConnString)
+	defer enqueuer.Close()
 
-		// Run the worker
-		eg.Go(queueServer.Run(
-			mailer.NewWorker(postmarkAdapter),
-		))
-	}
-
-	// Setup mailer enqueuer
-	mailerEnqueuer := mailer.NewEnqueuer(enqueuer)
+	// Create a new mail enqueuer.
+	mailEnqueuer := mailer.NewEnqueuer(enqueuer)
 
 	// HTTP server
 	{
 		// Create a new HTTP handler
-		httpHandler := newHTTPHandler(mailerEnqueuer)
+		httpHandler := newHTTPHandler(mailEnqueuer)
 
 		r := chi.NewRouter()
 		r.Use(middleware.Logger)

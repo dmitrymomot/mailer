@@ -5,6 +5,7 @@ import (
 	"errors"
 	"fmt"
 
+	"braces.dev/errtrace"
 	"github.com/dmitrymomot/mailer"
 	"github.com/mrz1836/postmark"
 )
@@ -32,7 +33,7 @@ type (
 // Validate the config
 func (c Config) Validate() error {
 	if c.From == "" {
-		return ErrMissingFromEmail
+		return errtrace.Wrap(ErrMissingFromEmail)
 	}
 	return nil
 }
@@ -41,10 +42,10 @@ func (c Config) Validate() error {
 // returns a new instance of the Client interface implementation
 func New(serverToken, accountToken string, conf Config) (*Client, error) {
 	if err := conf.Validate(); err != nil {
-		return nil, errors.Join(ErrFailedToCreateClient, err)
+		return nil, errtrace.Wrap(errors.Join(ErrFailedToCreateClient, err))
 	}
 	if serverToken == "" || accountToken == "" {
-		return nil, errors.Join(ErrFailedToCreateClient, ErrMissingCredentials)
+		return nil, errtrace.Wrap(errors.Join(ErrFailedToCreateClient, ErrMissingCredentials))
 	}
 	if conf.ReplyTo == "" {
 		conf.ReplyTo = conf.From
@@ -57,24 +58,24 @@ func New(serverToken, accountToken string, conf Config) (*Client, error) {
 
 // SendEmail sends an email.
 // It returns an error if sending fails.
-// Parameters:
-// - ctx: context.Context
-// - emailAddr: email address of the recipient
-// - subject: subject of the email
-// - htmlBody: HTML body of the email
-func (c *Client) SendEmail(ctx context.Context, emailAddr, subject, htmlBody string, attachments ...mailer.Attachment) error {
+// SendEmail sends an email using the Postmark client.
+// It takes a context and a SendEmailPayload as input.
+// The SendEmailPayload contains the necessary information
+// for the email, such as the recipient, subject, body, and attachments.
+// The function returns an error if the email fails to send.
+func (c *Client) SendEmail(ctx context.Context, payload mailer.SendEmailPayload) error {
 	// Create the email
 	e := postmark.Email{
 		TrackOpens: true,
 		ReplyTo:    c.config.ReplyTo,
 		TrackLinks: "HtmlOnly",
 		From:       c.config.From,
-		To:         emailAddr,
-		Subject:    subject,
-		HTMLBody:   htmlBody,
+		To:         payload.Email,
+		Subject:    payload.Subject,
+		HTMLBody:   payload.HTMLBody,
 		Attachments: func() []postmark.Attachment {
-			a := make([]postmark.Attachment, 0, len(attachments))
-			for _, attachment := range attachments {
+			a := make([]postmark.Attachment, 0, len(payload.Attachments))
+			for _, attachment := range payload.Attachments {
 				a = append(a, postmark.Attachment{
 					Name:        attachment.Name,
 					Content:     attachment.Content,
@@ -97,10 +98,10 @@ func (c *Client) SendEmail(ctx context.Context, emailAddr, subject, htmlBody str
 	// Send the email
 	resp, err := c.client.SendEmail(ctx, e)
 	if err != nil {
-		return errors.Join(ErrFailedToSendEmail, err)
+		return errtrace.Wrap(errors.Join(ErrFailedToSendEmail, err))
 	}
 	if resp.ErrorCode > 0 {
-		return errors.Join(ErrFailedToSendEmail, fmt.Errorf("%v %s", resp.ErrorCode, resp.Message))
+		return errtrace.Wrap(errors.Join(ErrFailedToSendEmail, fmt.Errorf("%v %s", resp.ErrorCode, resp.Message)))
 	}
 
 	return nil

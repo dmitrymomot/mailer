@@ -1,5 +1,7 @@
 package mailer
 
+import "braces.dev/errtrace"
+
 // Predefined task names.
 const (
 	SendEmailTask = "mailer.send_email" // SendEmailTask is a task name for sending an email.
@@ -31,3 +33,17 @@ type (
 		ContentID string `json:"content_id,omitempty"`
 	}
 )
+
+// Validate validates the SendEmailPayload.
+func (p SendEmailPayload) Validate() error {
+	if p.Email == "" {
+		return errtrace.Wrap(ErrMissingEmail)
+	}
+	if p.Subject == "" {
+		return errtrace.Wrap(ErrMissingSubject)
+	}
+	if p.HTMLBody == "" {
+		return errtrace.Wrap(ErrMissingHTMLBody)
+	}
+	return nil
+}

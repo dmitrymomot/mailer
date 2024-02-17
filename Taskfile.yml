@@ -1,0 +1,97 @@
+# https://taskfile.dev
+
+version: "3"
+
+tasks:
+  default:
+    silent: true
+    cmds:
+      - task: help
+
+  help:
+    desc: Show this help.
+    silent: true
+    aliases:
+      - h
+    cmds:
+      - task --list
+
+  clean:
+    desc: Clean the task cache and remove the .task directory.
+    silent: true
+    cmds:
+      - echo "Cleaning the task cache and removing the .task directory..."
+      - rm -rf .task
+
+  errtrace:
+    desc: Instrument the code with error trace wrapper.
+    silent: true
+    aliases: ["err"]
+    cmds:
+      - echo "Adding errtrace to generated files..."
+      - errtrace -w ./...
+      - go mod tidy
+      - echo "Done."
+
+  install:
+    desc: Install dependencies for local development.
+    silent: true
+    cmds:
+      - brew install mockery # Install Mockery (mocks generator)
+      - go install braces.dev/errtrace/cmd/errtrace@latest # Install errtrace (error trace wrapper)
+      - go install github.com/a-h/templ/cmd/templ@latest # Install templ (go views generator)
+    generates:
+      - /opt/homebrew/bin/mockery
+      - $HOME/go/bin/errtrace
+      - $HOME/go/bin/templ
+
+  update:
+    desc: Update dependencies for local development.
+    silent: true
+    aliases: [upgrade, upd, update-deps, update-dependencies]
+    cmds:
+      - brew upgrade mockery # Update Mockery (mocks generator)
+      - go install braces.dev/errtrace/cmd/errtrace@latest # Update errtrace (error trace wrapper)
+      - go install github.com/a-h/templ/cmd/templ@latest # Update templ (go views generator)
+
+  check:
+    desc: Check if all dependencies are installed.
+    silent: true
+    aliases: [check-deps, check-dependencies]
+    cmds:
+      - command -v mockery
+      - command -v errtrace
+      - command -v templ
+
+  templ:
+    desc: Generate go views from templ files.
+    silent: true
+    aliases:
+      - template
+      - tmpl
+      - tpl
+    cmds:
+      - echo "Formatting templ files..."
+      - templ fmt template/
+      - echo "Generating go template components from templ files..."
+      - templ generate template/
+      - task: errtrace
+      - go mod tidy
+      - echo "Done."
+    sources:
+      - template/**/*.templ
+    generates:
+      - template/**/*.go
+
+  mock:
+    desc: Generate mocks for repository interfaces.
+    summary: "Mockery (mocks generator) is required. Run `task install` to install it. See documentation for more details https://vektra.github.io/mockery/latest/"
+    aliases:
+      - mock
+      - gen-mocks
+    silent: true
+    dir: ./
+    cmds:
+      - mockery
+      - task: errtrace
+      - go mod tidy

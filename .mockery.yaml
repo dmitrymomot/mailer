@@ -1,0 +1,10 @@
+packages:
+  github.com/dmitrymomot/mailer:
+    config:
+      recursive: false
+      with-expecter: true
+      all: true
+      filename: "mock_{{.InterfaceNameLowerCamel}}.go"
+      dir: "mocks/{{.PackageName}}"
+      mockname: "Mock{{.InterfaceName}}"
+      outpkg: "mocks_{{.PackageName}}"
