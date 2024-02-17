@@ -24,7 +24,7 @@ func Card(children ...templ.Component) templ.Component {
 			templ_7745c5c3_Var1 = templ.NopComponent
 		}
 		ctx = templ.ClearChildren(ctx)
-		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<table class=\"container\" bgcolor=\"#FFFFFF\" cellpadding=\"0\" cellspacing=\"0\" role=\"presentation\" width=\"500\" style=\"border-radius: 4px; padding: 16px 32px;\"><tr><td align=\"left\">")
+		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<table class=\"container\" bgcolor=\"#FFFFFF\" cellpadding=\"0\" cellspacing=\"0\" role=\"presentation\" width=\"500\" style=\"border-radius: 4px; padding: 24px 32px;\"><tr><td align=\"left\">")
 		if templ_7745c5c3_Err != nil {
 			return errtrace.Wrap(templ_7745c5c3_Err)
 		}
