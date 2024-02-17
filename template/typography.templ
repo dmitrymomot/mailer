@@ -1,21 +1,29 @@
 package mailer_template
 
 templ Header(header string) {
-	<h1 style="color: #374151; font-weight: 600; margin: 20px 0 10px 0; line-height: 100%; font-size: 24px;">{ header }</h1>
+	<h1 style="color: #111827; font-weight: 800; margin: 20px 0 10px 0; line-height: 100%; font-size: 22px;">{ header }</h1>
 }
 
 templ SubHeader(header string) {
-	<h2 style="color: #374151; font-weight: 500; margin: 0; font-size: 18px;">{ header }</h2>
+	<h2 style="color: #111827; font-weight: 800; margin: 16px 0 8px 0; line-height: 100%; font-size: 18px;">{ header }</h2>
 }
 
 templ Paragraph(content string) {
-	<p style="color: #1f2937; font-size: 14px; line-height: 140%;">{ content }</p>
+	<p style="color: #111827; font-size: 16px; line-height: 160%;">{ content }</p>
 }
 
 templ ParagraphSecondary(content string) {
-	<p style="color: #4b5563; font-size: 12px; line-height: 140%;">{ content }</p>
+	<p style="color: #4b5563; font-size: 13px; line-height: 160%;">{ content }</p>
 }
 
 templ Link(url string, content string) {
 	<a href={ templ.URL(url) } style="color: #3b82f6; text-decoration: none;">{ content }</a>
+}
+
+templ List(items ...string) {
+	<ul style="color: #111827; font-size: 16px; line-height: 160%;">
+		for _, item := range items {
+			<li>{ item }</li>
+		}
+	</ul>
 }

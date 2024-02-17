@@ -24,7 +24,7 @@ func Header(header string) templ.Component {
 			templ_7745c5c3_Var1 = templ.NopComponent
 		}
 		ctx = templ.ClearChildren(ctx)
-		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<h1 style=\"color: #374151; font-weight: 600; margin: 20px 0 10px 0; line-height: 100%; font-size: 24px;\">")
+		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<h1 style=\"color: #111827; font-weight: 800; margin: 20px 0 10px 0; line-height: 100%; font-size: 22px;\">")
 		if templ_7745c5c3_Err != nil {
 			return errtrace.Wrap(templ_7745c5c3_Err)
 		}
@@ -61,14 +61,14 @@ func SubHeader(header string) templ.Component {
 			templ_7745c5c3_Var3 = templ.NopComponent
 		}
 		ctx = templ.ClearChildren(ctx)
-		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<h2 style=\"color: #374151; font-weight: 500; margin: 0; font-size: 18px;\">")
+		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<h2 style=\"color: #111827; font-weight: 800; margin: 16px 0 8px 0; line-height: 100%; font-size: 18px;\">")
 		if templ_7745c5c3_Err != nil {
 			return errtrace.Wrap(templ_7745c5c3_Err)
 		}
 		var templ_7745c5c3_Var4 string
 		templ_7745c5c3_Var4, templ_7745c5c3_Err = templ.JoinStringErrs(header)
 		if templ_7745c5c3_Err != nil {
-			return errtrace.Wrap(templ.Error{Err: templ_7745c5c3_Err, FileName: `template/typography.templ`, Line: 7, Col: 83})
+			return errtrace.Wrap(templ.Error{Err: templ_7745c5c3_Err, FileName: `template/typography.templ`, Line: 7, Col: 113})
 		}
 		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var4))
 		if templ_7745c5c3_Err != nil {
@@ -98,7 +98,7 @@ func Paragraph(content string) templ.Component {
 			templ_7745c5c3_Var5 = templ.NopComponent
 		}
 		ctx = templ.ClearChildren(ctx)
-		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<p style=\"color: #1f2937; font-size: 14px; line-height: 140%;\">")
+		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<p style=\"color: #111827; font-size: 16px; line-height: 160%;\">")
 		if templ_7745c5c3_Err != nil {
 			return errtrace.Wrap(templ_7745c5c3_Err)
 		}
@@ -135,7 +135,7 @@ func ParagraphSecondary(content string) templ.Component {
 			templ_7745c5c3_Var7 = templ.NopComponent
 		}
 		ctx = templ.ClearChildren(ctx)
-		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<p style=\"color: #4b5563; font-size: 12px; line-height: 140%;\">")
+		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<p style=\"color: #4b5563; font-size: 13px; line-height: 160%;\">")
 		if templ_7745c5c3_Err != nil {
 			return errtrace.Wrap(templ_7745c5c3_Err)
 		}
@@ -195,6 +195,53 @@ func Link(url string, content string) templ.Component {
 			return errtrace.Wrap(templ_7745c5c3_Err)
 		}
 		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("</a>")
+		if templ_7745c5c3_Err != nil {
+			return errtrace.Wrap(templ_7745c5c3_Err)
+		}
+		if !templ_7745c5c3_IsBuffer {
+			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteTo(templ_7745c5c3_W)
+		}
+		return errtrace.Wrap(templ_7745c5c3_Err)
+	})
+}
+
+func List(items ...string) templ.Component {
+	return templ.ComponentFunc(func(ctx context.Context, templ_7745c5c3_W io.Writer) (templ_7745c5c3_Err error) {
+		templ_7745c5c3_Buffer, templ_7745c5c3_IsBuffer := templ_7745c5c3_W.(*bytes.Buffer)
+		if !templ_7745c5c3_IsBuffer {
+			templ_7745c5c3_Buffer = templ.GetBuffer()
+			defer templ.ReleaseBuffer(templ_7745c5c3_Buffer)
+		}
+		ctx = templ.InitializeContext(ctx)
+		templ_7745c5c3_Var12 := templ.GetChildren(ctx)
+		if templ_7745c5c3_Var12 == nil {
+			templ_7745c5c3_Var12 = templ.NopComponent
+		}
+		ctx = templ.ClearChildren(ctx)
+		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<ul style=\"color: #111827; font-size: 16px; line-height: 160%;\">")
+		if templ_7745c5c3_Err != nil {
+			return errtrace.Wrap(templ_7745c5c3_Err)
+		}
+		for _, item := range items {
+			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<li>")
+			if templ_7745c5c3_Err != nil {
+				return errtrace.Wrap(templ_7745c5c3_Err)
+			}
+			var templ_7745c5c3_Var13 string
+			templ_7745c5c3_Var13, templ_7745c5c3_Err = templ.JoinStringErrs(item)
+			if templ_7745c5c3_Err != nil {
+				return errtrace.Wrap(templ.Error{Err: templ_7745c5c3_Err, FileName: `template/typography.templ`, Line: 25, Col: 13})
+			}
+			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var13))
+			if templ_7745c5c3_Err != nil {
+				return errtrace.Wrap(templ_7745c5c3_Err)
+			}
+			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("</li>")
+			if templ_7745c5c3_Err != nil {
+				return errtrace.Wrap(templ_7745c5c3_Err)
+			}
+		}
+		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("</ul>")
 		if templ_7745c5c3_Err != nil {
 			return errtrace.Wrap(templ_7745c5c3_Err)
 		}
