@@ -5,7 +5,7 @@ root = true
 
 [*]
 indent_style = space
-indent_size = 2
+indent_size = 4
 end_of_line = lf
 charset = utf-8
 trim_trailing_whitespace = true
@@ -23,3 +23,6 @@ indent_size = 4
 [*.sh]
 indent_style = tab
 indent_size = 4
+
+[*.{html,css,templ}]
+indent_size = 2
