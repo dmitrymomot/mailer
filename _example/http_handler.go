@@ -3,6 +3,8 @@ package main
 import (
 	"context"
 	"net/http"
+
+	"github.com/dmitrymomot/mailer"
 )
 
 type (
@@ -13,7 +15,7 @@ type (
 
 	// mailSender is a mail sender.
 	mailSender interface {
-		SendEmail(ctx context.Context, emailAddr, subject string, htmlBody string) error
+		SendEmail(ctx context.Context, payload mailer.SendEmailPayload) error
 	}
 )
 
@@ -35,7 +37,11 @@ func (h *httpHandler) SendEmail(w http.ResponseWriter, r *http.Request) {
 	}
 
 	// Send email
-	if err := h.mailSender.SendEmail(r.Context(), email, "Test Email", "<h1>Hi there!</h1>"); err != nil {
+	if err := h.mailSender.SendEmail(r.Context(), mailer.SendEmailPayload{
+		Email:    email,
+		Subject:  "Test Email",
+		HTMLBody: "<h1>Hi there!</h1>",
+	}); err != nil {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
 		return
 	}

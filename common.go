@@ -31,3 +31,17 @@ type (
 		ContentID string `json:"content_id,omitempty"`
 	}
 )
+
+// Validate validates the SendEmailPayload.
+func (p SendEmailPayload) Validate() error {
+	if p.Email == "" {
+		return ErrMissingEmail
+	}
+	if p.Subject == "" {
+		return ErrMissingSubject
+	}
+	if p.HTMLBody == "" {
+		return ErrMissingHTMLBody
+	}
+	return nil
+}

@@ -57,24 +57,24 @@ func New(serverToken, accountToken string, conf Config) (*Client, error) {
 
 // SendEmail sends an email.
 // It returns an error if sending fails.
-// Parameters:
-// - ctx: context.Context
-// - emailAddr: email address of the recipient
-// - subject: subject of the email
-// - htmlBody: HTML body of the email
-func (c *Client) SendEmail(ctx context.Context, emailAddr, subject, htmlBody string, attachments ...mailer.Attachment) error {
+// SendEmail sends an email using the Postmark client.
+// It takes a context and a SendEmailPayload as input.
+// The SendEmailPayload contains the necessary information
+// for the email, such as the recipient, subject, body, and attachments.
+// The function returns an error if the email fails to send.
+func (c *Client) SendEmail(ctx context.Context, payload mailer.SendEmailPayload) error {
 	// Create the email
 	e := postmark.Email{
 		TrackOpens: true,
 		ReplyTo:    c.config.ReplyTo,
 		TrackLinks: "HtmlOnly",
 		From:       c.config.From,
-		To:         emailAddr,
-		Subject:    subject,
-		HTMLBody:   htmlBody,
+		To:         payload.Email,
+		Subject:    payload.Subject,
+		HTMLBody:   payload.HTMLBody,
 		Attachments: func() []postmark.Attachment {
-			a := make([]postmark.Attachment, 0, len(attachments))
-			for _, attachment := range attachments {
+			a := make([]postmark.Attachment, 0, len(payload.Attachments))
+			for _, attachment := range payload.Attachments {
 				a = append(a, postmark.Attachment{
 					Name:        attachment.Name,
 					Content:     attachment.Content,
