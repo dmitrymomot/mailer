@@ -1,6 +1,11 @@
 package mailer_template
 
-templ Main() {
+type MainData struct {
+	Title     string // Add your title here. This will be visible in the inbox preview in some email clients.
+	Preheader string // Add your preheader text here. This will be visible in the inbox preview in some email clients. You can use this to provide a summary of your email. Max 150 characters. It must be a plain text and not contain any HTML tags.
+}
+
+templ Main(data MainData) {
 	<!DOCTYPE html>
 	<html lang="en" xmlns:v="urn:schemas-microsoft-com:vml" xmlns:o="urn:schemas-microsoft-com:office:office">
 		<head>
@@ -8,7 +13,7 @@ templ Main() {
 			<meta http-equiv="x-ua-compatible" content="ie=edge"/>
 			<meta name="viewport" content="width=device-width, initial-scale=1"/>
 			<meta name="x-apple-disable-message-reformatting"/>
-			<title>Acorn Email Framework</title>
+			<title>{ data.Title }</title>
 			<!--[if mso]>
       <xml>
         <o:OfficeDocumentSettings>
@@ -131,6 +136,7 @@ templ Main() {
 		<body style="margin:0;padding:0;width:100%;word-break:break-word;-webkit-font-smoothing:antialiased;">
 			<div lang="en" style="display:none;">
 				<!-- Add your preheader text here -->
+				{ data.Preheader }
 			</div>
 			<table lang="en" bgcolor="#EEEEEE" cellpadding="16" cellspacing="0" role="presentation" width="100%">
 				<tr>
@@ -138,7 +144,7 @@ templ Main() {
 						<table class="container" bgcolor="#FFFFFF" cellpadding="0" cellspacing="0" role="presentation" width="600">
 							<tr>
 								<td align="left">
-									<!-- ADD ROWS HERE -->
+									{ children... }
 								</td>
 							</tr>
 						</table>
