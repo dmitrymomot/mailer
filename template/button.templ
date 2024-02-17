@@ -1,0 +1,128 @@
+package mailer_template
+
+// ButtonColor represents the color of the button
+type ButtonColor string
+
+// String returns the string representation of the button color
+func (c ButtonColor) String() string {
+	return string(c)
+}
+
+// Predefined button colors
+const (
+	ButtonColorPrimary   ButtonColor = "#3b82f6" // Blue
+	ButtonColorSecondary ButtonColor = "#64748b" // Gray
+	ButtonColorSuccess   ButtonColor = "#22c55e" // Green
+	ButtonColorDanger    ButtonColor = "#f43f5e" // Red
+)
+
+templ Button(color ButtonColor, label, link string) {
+	<!-- Default -->
+	<table align="center" cellpadding="0" cellspacing="0" role="presentation" style="margin: 0 auto;">
+		<tr>
+			<th bgcolor={ color.String() } style="border-radius: 3px; mso-padding-alt: 6px 42px 12px;">
+				<a href={ templ.URL(link) } style="color: #FFFFFF; display: inline-block; font-size: 13px; line-height: 100%; padding: 12px 42px; text-decoration: none;">{ label }</a>
+			</th>
+		</tr>
+	</table>
+	<!-- Custom: center-aligned on mobile only -->
+	<table class="align-sm-center" cellpadding="0" cellspacing="0" role="presentation">
+		<tr>
+			<th bgcolor={ color.String() } style="border-radius: 3px; mso-padding-alt: 6px 42px 12px;">
+				<a href={ templ.URL(link) } style="color: #FFFFFF; display: inline-block; font-size: 13px; line-height: 100%; padding: 12px 42px; text-decoration: none;">{ label }</a>
+			</th>
+		</tr>
+	</table>
+}
+
+templ ButtonPrimary(label, link string) {
+	@Button(ButtonColorPrimary, label, link)
+}
+
+templ ButtonSecondary(label, link string) {
+	@Button(ButtonColorSecondary, label, link)
+}
+
+templ ButtonSuccess(label, link string) {
+	@Button(ButtonColorSuccess, label, link)
+}
+
+templ ButtonDanger(label, link string) {
+	@Button(ButtonColorDanger, label, link)
+}
+
+templ ButtonOutlinedPrimary(label, link string) {
+	<!-- Default -->
+	<table align="center" cellpadding="0" cellspacing="0" role="presentation" style="margin: 0 auto;">
+		<tr>
+			<th style="border: 2px solid #3b82f6; border-radius: 3px; mso-padding-alt: 6px 42px 12px;">
+				<a href={ templ.URL(link) } style="color: #3b82f6; display: inline-block; font-size: 13px; line-height: 100%; padding: 12px 42px; text-decoration: none;">{ label }</a>
+			</th>
+		</tr>
+	</table>
+	<!-- Custom: Full width on mobile -->
+	<table class="align-sm-center" cellpadding="0" cellspacing="0" role="presentation">
+		<tr>
+			<th style="border: 2px solid #3b82f6; border-radius: 3px; mso-padding-alt: 6px 42px 12px;">
+				<a href={ templ.URL(link) } class="col" style="color: #3b82f6; display: inline-block; font-size: 13px; line-height: 100%; padding: 12px 42px; text-decoration: none;">{ label }</a>
+			</th>
+		</tr>
+	</table>
+}
+
+templ ButtonOutlinedSecondary(label, link string) {
+	<!-- Default -->
+	<table align="center" cellpadding="0" cellspacing="0" role="presentation" style="margin: 0 auto;">
+		<tr>
+			<th style="border: 2px solid #64748b; border-radius: 3px; mso-padding-alt: 6px 42px 12px;">
+				<a href={ templ.URL(link) } style="color: #64748b; display: inline-block; font-size: 13px; line-height: 100%; padding: 12px 42px; text-decoration: none;">{ label }</a>
+			</th>
+		</tr>
+	</table>
+	<!-- Custom: Full width on mobile -->
+	<table class="align-sm-center" cellpadding="0" cellspacing="0" role="presentation">
+		<tr>
+			<th style="border: 2px solid #64748b; border-radius: 3px; mso-padding-alt: 6px 42px 12px;">
+				<a href={ templ.URL(link) } class="col" style="color: #64748b; display: inline-block; font-size: 13px; line-height: 100%; padding: 12px 42px; text-decoration: none;">{ label }</a>
+			</th>
+		</tr>
+	</table>
+}
+
+templ ButtonOutlinedSuccess(label, link string) {
+	<!-- Default -->
+	<table align="center" cellpadding="0" cellspacing="0" role="presentation" style="margin: 0 auto;">
+		<tr>
+			<th style="border: 2px solid #22c55e; border-radius: 3px; mso-padding-alt: 6px 42px 12px;">
+				<a href={ templ.URL(link) } style="color: #22c55e; display: inline-block; font-size: 13px; line-height: 100%; padding: 12px 42px; text-decoration: none;">{ label }</a>
+			</th>
+		</tr>
+	</table>
+	<!-- Custom: Full width on mobile -->
+	<table class="align-sm-center" cellpadding="0" cellspacing="0" role="presentation">
+		<tr>
+			<th style="border: 2px solid #22c55e; border-radius: 3px; mso-padding-alt: 6px 42px 12px;">
+				<a href={ templ.URL(link) } class="col" style="color: #22c55e; display: inline-block; font-size: 13px; line-height: 100%; padding: 12px 42px; text-decoration: none;">{ label }</a>
+			</th>
+		</tr>
+	</table>
+}
+
+templ ButtonOutlinedDanger(label, link string) {
+	<!-- Default -->
+	<table align="center" cellpadding="0" cellspacing="0" role="presentation" style="margin: 0 auto;">
+		<tr>
+			<th style="border: 2px solid #f43f5e; border-radius: 3px; mso-padding-alt: 6px 42px 12px;">
+				<a href={ templ.URL(link) } style="color: #f43f5e; display: inline-block; font-size: 13px; line-height: 100%; padding: 12px 42px; text-decoration: none;">{ label }</a>
+			</th>
+		</tr>
+	</table>
+	<!-- Custom: Full width on mobile -->
+	<table class="align-sm-center" cellpadding="0" cellspacing="0" role="presentation">
+		<tr>
+			<th style="border: 2px solid #f43f5e; border-radius: 3px; mso-padding-alt: 6px 42px 12px;">
+				<a href={ templ.URL(link) } class="col" style="color: #f43f5e; display: inline-block; font-size: 13px; line-height: 100%; padding: 12px 42px; text-decoration: none;">{ label }</a>
+			</th>
+		</tr>
+	</table>
+}
