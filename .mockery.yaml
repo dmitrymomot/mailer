@@ -1,0 +1,19 @@
+packages:
+  github.com/dmitrymomot/go-app-template/internal/repository:
+    config:
+      recursive: false
+      with-expecter: true
+      all: true
+      filename: "mock_{{.InterfaceNameLowerCamel}}.go"
+      dir: "mocks/{{.PackageName}}"
+      mockname: "Mock{{.InterfaceName}}"
+      outpkg: "mocks_{{.PackageName}}"
+  github.com/dmitrymomot/go-app-template/internal/services:
+    config:
+      recursive: false
+      with-expecter: true
+      all: true
+      filename: "mock_{{.InterfaceNameLowerCamel}}.go"
+      dir: "mocks/{{.PackageName}}"
+      mockname: "Mock{{.InterfaceName}}"
+      outpkg: "mocks_{{.PackageName}}"
