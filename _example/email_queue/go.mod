@@ -1,4 +1,4 @@
-module mailer_example
+module email_queue
 
 go 1.21
 
