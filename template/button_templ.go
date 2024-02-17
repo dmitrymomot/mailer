@@ -24,7 +24,7 @@ const (
 	ButtonColorPrimary   ButtonColor = "#3b82f6" // Blue
 	ButtonColorSecondary ButtonColor = "#64748b" // Gray
 	ButtonColorSuccess   ButtonColor = "#22c55e" // Green
-	ButtonColorDanger    ButtonColor = "#f43f5e" // Red
+	ButtonColorDanger    ButtonColor = "#dc2626" // Red
 )
 
 // ButtonAlign represents the alignment of the button
@@ -89,7 +89,7 @@ func Button(color ButtonColor, align ButtonAlign, label, link string) templ.Comp
 		if templ_7745c5c3_Err != nil {
 			return errtrace.Wrap(templ_7745c5c3_Err)
 		}
-		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("\" style=\"color: #FFFFFF; display: inline-block; font-size: 13px; line-height: 100%; padding: 12px 42px; text-decoration: none;\">")
+		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("\" style=\"color: #FFFFFF; display: inline-block; font-size: 14px; line-height: 100%; padding: 12px 42px; text-decoration: none;\">")
 		if templ_7745c5c3_Err != nil {
 			return errtrace.Wrap(templ_7745c5c3_Err)
 		}
@@ -239,7 +239,7 @@ func ButtonOutlinedPrimary(align ButtonAlign, label, link string) templ.Componen
 		if templ_7745c5c3_Err != nil {
 			return errtrace.Wrap(templ_7745c5c3_Err)
 		}
-		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("\" style=\"color: #3b82f6; display: inline-block; font-size: 13px; line-height: 100%; padding: 12px 42px; text-decoration: none;\">")
+		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("\" style=\"color: #3b82f6; display: inline-block; font-size: 14px; line-height: 100%; padding: 12px 42px; text-decoration: none;\">")
 		if templ_7745c5c3_Err != nil {
 			return errtrace.Wrap(templ_7745c5c3_Err)
 		}
@@ -293,7 +293,7 @@ func ButtonOutlinedSecondary(align ButtonAlign, label, link string) templ.Compon
 		if templ_7745c5c3_Err != nil {
 			return errtrace.Wrap(templ_7745c5c3_Err)
 		}
-		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("\" style=\"color: #64748b; display: inline-block; font-size: 13px; line-height: 100%; padding: 12px 42px; text-decoration: none;\">")
+		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("\" style=\"color: #64748b; display: inline-block; font-size: 14px; line-height: 100%; padding: 12px 42px; text-decoration: none;\">")
 		if templ_7745c5c3_Err != nil {
 			return errtrace.Wrap(templ_7745c5c3_Err)
 		}
@@ -347,7 +347,7 @@ func ButtonOutlinedSuccess(align ButtonAlign, label, link string) templ.Componen
 		if templ_7745c5c3_Err != nil {
 			return errtrace.Wrap(templ_7745c5c3_Err)
 		}
-		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("\" style=\"color: #22c55e; display: inline-block; font-size: 13px; line-height: 100%; padding: 12px 42px; text-decoration: none;\">")
+		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("\" style=\"color: #22c55e; display: inline-block; font-size: 14px; line-height: 100%; padding: 12px 42px; text-decoration: none;\">")
 		if templ_7745c5c3_Err != nil {
 			return errtrace.Wrap(templ_7745c5c3_Err)
 		}
@@ -392,7 +392,7 @@ func ButtonOutlinedDanger(align ButtonAlign, label, link string) templ.Component
 		if templ_7745c5c3_Err != nil {
 			return errtrace.Wrap(templ_7745c5c3_Err)
 		}
-		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("\" cellpadding=\"0\" cellspacing=\"0\" role=\"presentation\" style=\"margin: 0 auto;\"><tr><th style=\"border: 2px solid #f43f5e; border-radius: 3px; mso-padding-alt: 6px 42px 12px;\"><a href=\"")
+		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("\" cellpadding=\"0\" cellspacing=\"0\" role=\"presentation\" style=\"margin: 0 auto;\"><tr><th style=\"border: 2px solid #dc2626; border-radius: 3px; mso-padding-alt: 6px 42px 12px;\"><a href=\"")
 		if templ_7745c5c3_Err != nil {
 			return errtrace.Wrap(templ_7745c5c3_Err)
 		}
@@ -401,7 +401,7 @@ func ButtonOutlinedDanger(align ButtonAlign, label, link string) templ.Component
 		if templ_7745c5c3_Err != nil {
 			return errtrace.Wrap(templ_7745c5c3_Err)
 		}
-		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("\" style=\"color: #f43f5e; display: inline-block; font-size: 13px; line-height: 100%; padding: 12px 42px; text-decoration: none;\">")
+		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("\" style=\"color: #dc2626; display: inline-block; font-size: 14px; line-height: 100%; padding: 12px 42px; text-decoration: none;\">")
 		if templ_7745c5c3_Err != nil {
 			return errtrace.Wrap(templ_7745c5c3_Err)
 		}
