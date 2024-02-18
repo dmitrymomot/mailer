@@ -1,6 +1,6 @@
 package mailer_template
 
-templ Alert(text string) {
+templ AlertInfo(text string) {
 	<table cellpadding="0" cellspacing="0" role="presentation" width="100%" style="border: 2px solid #3b82f6; border-radius: 4px;">
 		<tr>
 			<td bgcolor="#3b82f6" style="color: #FFFFFF; padding: 16px 32px;">
@@ -10,10 +10,70 @@ templ Alert(text string) {
 	</table>
 }
 
-templ AlertOutlined(text string) {
-	<table cellpadding="0" cellspacing="0" role="presentation" width="100%" style="border: 2px solid #3b82f6;border-radius: 4px;">
+templ AlertSuccess(text string) {
+	<table cellpadding="0" cellspacing="0" role="presentation" width="100%" style="border: 2px solid #22c55e; border-radius: 4px;">
 		<tr>
-			<td style="color: #2563eb; padding: 16px 32px;">
+			<td bgcolor="#22c55e" style="color: #FFFFFF; padding: 16px 32px;">
+				{ text }
+			</td>
+		</tr>
+	</table>
+}
+
+templ AlertWarning(text string) {
+	<table cellpadding="0" cellspacing="0" role="presentation" width="100%" style="border: 2px solid #eab308; border-radius: 4px;">
+		<tr>
+			<td bgcolor="#eab308" style="color: #FFFFFF; padding: 16px 32px;">
+				{ text }
+			</td>
+		</tr>
+	</table>
+}
+
+templ AlertDanger(text string) {
+	<table cellpadding="0" cellspacing="0" role="presentation" width="100%" style="border: 2px solid #ef4444; border-radius: 4px;">
+		<tr>
+			<td bgcolor="#ef4444" style="color: #FFFFFF; padding: 16px 32px;">
+				{ text }
+			</td>
+		</tr>
+	</table>
+}
+
+templ AlertInfoOutlined(text string) {
+	<table cellpadding="0" cellspacing="0" role="presentation" width="100%" style="border: 2px solid #3b82f6; border-radius: 4px;">
+		<tr>
+			<td style="color: #2563eb; padding: 16px 32px; font-weight:500;">
+				{ text }
+			</td>
+		</tr>
+	</table>
+}
+
+templ AlertSuccessOutlined(text string) {
+	<table cellpadding="0" cellspacing="0" role="presentation" width="100%" style="border: 2px solid #22c55e; border-radius: 4px;">
+		<tr>
+			<td style="color: #22c55e; padding: 16px 32px; font-weight:500;">
+				{ text }
+			</td>
+		</tr>
+	</table>
+}
+
+templ AlertWarningOutlined(text string) {
+	<table cellpadding="0" cellspacing="0" role="presentation" width="100%" style="border: 2px solid #eab308; border-radius: 4px;">
+		<tr>
+			<td style="color: #eab308; padding: 16px 32px; font-weight:500;">
+				{ text }
+			</td>
+		</tr>
+	</table>
+}
+
+templ AlertDangerOutlined(text string) {
+	<table cellpadding="0" cellspacing="0" role="presentation" width="100%" style="border: 2px solid #ef4444; border-radius: 4px;">
+		<tr>
+			<td style="color: #ef4444; padding: 16px 32px; font-weight:500;">
 				{ text }
 			</td>
 		</tr>
