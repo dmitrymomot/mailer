@@ -26,10 +26,28 @@ func emailPreview(w http.ResponseWriter, r *http.Request) {
 			Preheader: "Enim deserunt non deserunt deserunt commodo cupidatat excepteur esse ad laborum.",
 		},
 		mailer_template.Container(
-			mailer_template.Alert("Aliqua adipisicing enim irure do consectetur nostrud exercitation consectetur commodo."),
+			mailer_template.AlertInfo("Aliqua adipisicing enim irure do consectetur nostrud exercitation consectetur commodo."),
 		),
 		mailer_template.Container(
-			mailer_template.AlertOutlined("Dolore exercitation voluptate cupidatat cillum quis exercitation irure adipisicing ex."),
+			mailer_template.AlertInfoOutlined("Dolore exercitation voluptate cupidatat cillum quis exercitation irure adipisicing ex."),
+		),
+		mailer_template.Container(
+			mailer_template.AlertSuccess("Aliqua adipisicing enim irure do consectetur nostrud exercitation consectetur commodo."),
+		),
+		mailer_template.Container(
+			mailer_template.AlertSuccessOutlined("Dolore exercitation voluptate cupidatat cillum quis exercitation irure adipisicing ex."),
+		),
+		mailer_template.Container(
+			mailer_template.AlertWarning("Aliqua adipisicing enim irure do consectetur nostrud exercitation consectetur commodo."),
+		),
+		mailer_template.Container(
+			mailer_template.AlertWarningOutlined("Dolore exercitation voluptate cupidatat cillum quis exercitation irure adipisicing ex."),
+		),
+		mailer_template.Container(
+			mailer_template.AlertDanger("Aliqua adipisicing enim irure do consectetur nostrud exercitation consectetur commodo."),
+		),
+		mailer_template.Container(
+			mailer_template.AlertDangerOutlined("Dolore exercitation voluptate cupidatat cillum quis exercitation irure adipisicing ex."),
 		),
 		mailer_template.Card(
 			mailer_template.SubHeader("Hi there!"),
@@ -59,6 +77,11 @@ func emailPreview(w http.ResponseWriter, r *http.Request) {
 				ActionBtnLabel: "Use code",
 			}),
 			mailer_template.Divider(),
+			mailer_template.ParagraphSecondary("Aute do aliqua consequat nulla ad adipisicing aliquip adipisicing exercitation esse. Ipsum amet consequat aliqua culpa excepteur sint anim dolor duis magna et dolor. Dolore Lorem ut dolor aliquip amet sint. Nostrud deserunt sunt elit amet qui consequat sint sit. Nostrud laborum dolore occaecat officia ex culpa officia cillum occaecat proident amet laboris culpa anim."),
+		),
+		mailer_template.Container(
+			mailer_template.Divider(),
+
 			mailer_template.ParagraphSecondary("Aute do aliqua consequat nulla ad adipisicing aliquip adipisicing exercitation esse. Ipsum amet consequat aliqua culpa excepteur sint anim dolor duis magna et dolor. Dolore Lorem ut dolor aliquip amet sint. Nostrud deserunt sunt elit amet qui consequat sint sit. Nostrud laborum dolore occaecat officia ex culpa officia cillum occaecat proident amet laboris culpa anim."),
 		),
 		mailer_template.ParagraphSecondary("@ 2024 All rights reserved"),
