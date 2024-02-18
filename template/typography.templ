@@ -9,21 +9,23 @@ templ SubHeader(header string) {
 }
 
 templ Paragraph(content string) {
-	<p style="color: #111827; font-size: 16px; line-height: 160%;">{ content }</p>
+	<p style="color: #111827; font-size: 16px; line-height: 160%;">
+		@templ.Raw(content)
+	</p>
 }
 
 templ ParagraphSecondary(content string) {
-	<p style="color: #4b5563; font-size: 13px; line-height: 160%;">{ content }</p>
-}
-
-templ Link(url string, content string) {
-	<a href={ templ.URL(url) } style="color: #3b82f6; text-decoration: none;">{ content }</a>
+	<p style="color: #4b5563; font-size: 13px; line-height: 160%;">
+		@templ.Raw(content)
+	</p>
 }
 
 templ List(items ...string) {
 	<ul style="color: #111827; font-size: 16px; line-height: 160%;">
 		for _, item := range items {
-			<li>{ item }</li>
+			<li>
+				@templ.Raw(item)
+			</li>
 		}
 	</ul>
 }
