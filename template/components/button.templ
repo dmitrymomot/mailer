@@ -1,0 +1,36 @@
+package components
+
+import "github.com/dmitrymomot/mailer/template/components/utils"
+import "fmt"
+
+templ ButtonFilled(align utils.Alignment, color utils.Color, buttonText, buttonLink string) {
+	<table cellpadding="0" cellspacing="0" role="presentation" style="margin: 0 auto;" align={ align.String() }>
+		<tr>
+			<th bgcolor={ color.String() } style="border-radius: 3px; mso-padding-alt: 6px 42px 12px;">
+				<a href={ templ.URL(buttonLink) } style="color: #FFFFFF; display: inline-block; font-size: 13px; line-height: 100%; padding: 12px 42px; text-decoration: none;">
+					{ buttonText }
+				</a>
+			</th>
+		</tr>
+	</table>
+}
+
+templ ButtonOutlined(align utils.Alignment, color utils.Color, buttonText, buttonLink string) {
+	<table cellpadding="0" cellspacing="0" role="presentation" style="margin: 0 auto;" align={ align.String() }>
+		<tr>
+			<th { buttonOutlinedAttrs(color)... }>
+				<a href={ templ.URL(buttonLink) } { buttonOutlinedLinkAttrs(color)... }>
+					{ buttonText }
+				</a>
+			</th>
+		</tr>
+	</table>
+}
+
+func buttonOutlinedAttrs(color utils.Color) templ.Attributes {
+	return templ.Attributes{"style": fmt.Sprintf("border: 2px solid %s; border-radius: 3px; mso-padding-alt: 6px 42px 12px;", color.String())}
+}
+
+func buttonOutlinedLinkAttrs(color utils.Color) templ.Attributes {
+	return templ.Attributes{"style": fmt.Sprintf("color: %s; display: inline-block; font-size: 13px; line-height: 100%; padding: 12px 42px; text-decoration: none;", color.String())}
+}
