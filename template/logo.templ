@@ -1,0 +1,17 @@
+package mailer_template
+
+templ Logo(fileURL, altText string, width string, link ...string) {
+	<table class="container" bgcolor="transparent" cellpadding="20" cellspacing="0" role="presentation" width="500">
+		<tr>
+			<td align="center">
+				if len(link) > 0 {
+					<a href={ templ.URL(link[0]) } target="_blank">
+						<img src={ fileURL } alt={ altText } width={ width }/>
+					</a>
+				} else {
+					<img src={ fileURL } alt={ altText } width={ width }/>
+				}
+			</td>
+		</tr>
+	</table>
+}

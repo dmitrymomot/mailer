@@ -190,3 +190,61 @@ func List(items ...string) templ.Component {
 		return errtrace.Wrap(templ_7745c5c3_Err)
 	})
 }
+
+func Link(url, text string) templ.Component {
+	return templ.ComponentFunc(func(ctx context.Context, templ_7745c5c3_W io.Writer) (templ_7745c5c3_Err error) {
+		templ_7745c5c3_Buffer, templ_7745c5c3_IsBuffer := templ_7745c5c3_W.(*bytes.Buffer)
+		if !templ_7745c5c3_IsBuffer {
+			templ_7745c5c3_Buffer = templ.GetBuffer()
+			defer templ.ReleaseBuffer(templ_7745c5c3_Buffer)
+		}
+		ctx = templ.InitializeContext(ctx)
+		templ_7745c5c3_Var8 := templ.GetChildren(ctx)
+		if templ_7745c5c3_Var8 == nil {
+			templ_7745c5c3_Var8 = templ.NopComponent
+		}
+		ctx = templ.ClearChildren(ctx)
+		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("<p style=\"color: #3b82f6; font-size: 16px; line-height: 160%;\"><a href=\"")
+		if templ_7745c5c3_Err != nil {
+			return errtrace.Wrap(templ_7745c5c3_Err)
+		}
+		var templ_7745c5c3_Var9 templ.SafeURL = templ.URL(url)
+		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(string(templ_7745c5c3_Var9)))
+		if templ_7745c5c3_Err != nil {
+			return errtrace.Wrap(templ_7745c5c3_Err)
+		}
+		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("\" style=\"color: #3b82f6; text-decoration: underline;\">")
+		if templ_7745c5c3_Err != nil {
+			return errtrace.Wrap(templ_7745c5c3_Err)
+		}
+		if text == "" {
+			var templ_7745c5c3_Var10 string
+			templ_7745c5c3_Var10, templ_7745c5c3_Err = templ.JoinStringErrs(url)
+			if templ_7745c5c3_Err != nil {
+				return errtrace.Wrap(templ.Error{Err: templ_7745c5c3_Err, FileName: `template/typography.templ`, Line: 36, Col: 9})
+			}
+			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var10))
+			if templ_7745c5c3_Err != nil {
+				return errtrace.Wrap(templ_7745c5c3_Err)
+			}
+		} else {
+			var templ_7745c5c3_Var11 string
+			templ_7745c5c3_Var11, templ_7745c5c3_Err = templ.JoinStringErrs(text)
+			if templ_7745c5c3_Err != nil {
+				return errtrace.Wrap(templ.Error{Err: templ_7745c5c3_Err, FileName: `template/typography.templ`, Line: 38, Col: 10})
+			}
+			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(templ.EscapeString(templ_7745c5c3_Var11))
+			if templ_7745c5c3_Err != nil {
+				return errtrace.Wrap(templ_7745c5c3_Err)
+			}
+		}
+		_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("</a></p>")
+		if templ_7745c5c3_Err != nil {
+			return errtrace.Wrap(templ_7745c5c3_Err)
+		}
+		if !templ_7745c5c3_IsBuffer {
+			_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteTo(templ_7745c5c3_W)
+		}
+		return errtrace.Wrap(templ_7745c5c3_Err)
+	})
+}
