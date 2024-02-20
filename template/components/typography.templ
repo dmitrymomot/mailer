@@ -1,0 +1,39 @@
+package components
+
+templ H1() {
+	<h1>
+		{ children... }
+	</h1>
+}
+
+templ H2() {
+	<h2>
+		{ children... }
+	</h2>
+}
+
+templ P() {
+	<p>
+		{ children... }
+	</p>
+}
+
+templ Link(text, url string) {
+	<a href={ templ.URL(url) }>
+		{ text }
+	</a>
+}
+
+templ List(items ...string) {
+	<ul>
+		for _, item := range items {
+			<li>
+				@templ.Raw(item)
+			</li>
+		}
+	</ul>
+}
+
+templ Image(fileURL, altText string) {
+	<img src={ fileURL } alt={ altText }/>
+}
