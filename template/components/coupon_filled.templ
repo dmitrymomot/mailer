@@ -16,7 +16,7 @@ func (c CouponFilledData) CtaLink() templ.SafeURL {
 	if c.CTA.Link == "" {
 		return ""
 	}
-	return templ.SafeURL(c.CTA.Link)
+	return templ.URL(c.CTA.Link)
 }
 
 func (c CouponFilledData) CtaText() string {
