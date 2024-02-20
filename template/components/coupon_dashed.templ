@@ -3,43 +3,43 @@ package components
 import "fmt"
 
 type CouponDashedData struct {
-	Percent uint8
-	Coupon  string
-	Action  struct {
-		URL  string
-		Text string
+	DiscountPercent uint8
+	Coupon          string
+	CTA             struct {
+		Text    string
+		Link    string
+		SubText string
 	}
-	CtaText string
 }
 
 // PercentStr returns the percent as a string
 func (d CouponDashedData) PercentStr() string {
-	return fmt.Sprintf("%d", d.Percent)
+	return fmt.Sprintf("%d", d.DiscountPercent)
 }
 
-func (d CouponDashedData) ActionText() string {
-	if d.Action.Text == "" {
+func (d CouponDashedData) CtaText() string {
+	if d.CTA.Text == "" {
 		return "REDEEM COUPON"
 	}
-	return d.Action.Text
+	return d.CTA.Text
 }
 
-func (d CouponDashedData) ActionURL() templ.SafeURL {
-	if d.Action.URL == "" {
+func (d CouponDashedData) CtaLink() templ.SafeURL {
+	if d.CTA.Link == "" {
 		return ""
 	}
-	return templ.URL(d.Action.URL)
+	return templ.URL(d.CTA.Link)
 }
 
-func (d CouponDashedData) GetCtaText() string {
-	if d.CtaText == "" {
+func (d CouponDashedData) CtaSubText() string {
+	if d.CTA.SubText == "" {
 		return "With coupon"
 	}
-	return d.CtaText
+	return d.CTA.SubText
 }
 
 templ CouponDashed(data CouponDashedData) {
-	if data.Percent == 0 || data.Coupon == "" {
+	if data.DiscountPercent == 0 || data.Coupon == "" {
 		return
 	}
 	<table cellpadding="0" cellspacing="0" role="presentation" width="100%">
@@ -63,12 +63,12 @@ templ CouponDashed(data CouponDashedData) {
 												</th>
 											</tr>
 										</table>
-										<div style="color: #999999;">{ data.GetCtaText() } <span style="border: 1px solid #EA4B35; border-radius: 3px; color: #EA4B35; display: inline-block; font-size: 90%; padding: 1px 5px;">{ data.Coupon }</span></div>
+										<div style="color: #999999;">{ data.CtaSubText() } <span style="border: 1px solid #EA4B35; border-radius: 3px; color: #EA4B35; display: inline-block; font-size: 90%; padding: 1px 5px;">{ data.Coupon }</span></div>
 										<div class="spacer py-sm-16" style="line-height: 32px;">&zwnj;</div>
 										<table cellpadding="0" cellspacing="0" role="presentation">
 											<tr>
 												<th bgcolor="#000000" style="mso-padding-alt: 6px 32px 12px;">
-													<a href={ data.ActionURL() } style="color: #FFFFFF; display: inline-block; font-size: 13px; line-height: 100%; padding: 12px 32px; text-decoration: none;">{ data.ActionText() } &rarr;</a>
+													<a href={ data.CtaLink() } style="color: #FFFFFF; display: inline-block; font-size: 13px; line-height: 100%; padding: 12px 32px; text-decoration: none;">{ data.CtaText() } &rarr;</a>
 												</th>
 											</tr>
 										</table>
