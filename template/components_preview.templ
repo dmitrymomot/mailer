@@ -1,0 +1,197 @@
+package template
+
+import "github.com/dmitrymomot/mailer/template/components"
+import "github.com/dmitrymomot/mailer/template/utils"
+
+templ ComponentsPreview() {
+	@components.Layout("en", "Components Preview", "Preview of all components") {
+		@components.Wrapper() {
+			@components.Logo("/assets/logo.svg", "https://example.com")
+			// @components.LogoText("SampleCo", "https://example.com")
+		}
+		@components.Wrapper() {
+			@components.Container(utils.BgWhite) {
+				@components.Row() {
+					@components.ColFull(utils.AlignLeft) {
+						@components.H1("Hello, World!")
+						@components.P() {
+							Lorem ipsum dolor sit amet, consectetur 
+							@components.LabelFilled(utils.Primary, "test label")
+							elit. Nulla nec purus feugiat, molestie ipsum et, consequat nibh. Etiam non elit dui. Nullam vel erat sed elit viverra aliquet. Aenean auctor wisi et urna. Aliquam erat volutpat. Duis ac turpis. Integer rutrum ante eu lacus. Link example: 
+							@components.Link("Example", "https://example.com")
+						}
+					}
+				}
+				@components.Divider()
+				@components.Row() {
+					@components.ColHalf(utils.AlignLeft) {
+						@components.H2("Subheading h2")
+						@components.P() {
+							Aliqua excepteur duis do exercitation. Dolor velit commodo aliqua ipsum id aute qui sit amet ullamco in incididunt.
+						}
+					}
+					@components.ColHalf(utils.AlignLeft) {
+						@components.H2("Subheading h2")
+						@components.P() {
+							Sit est ex dolor dolore veniam fugiat ea ad elit Lorem quis.
+						}
+					}
+				}
+				@components.Row() {
+					@components.ColFull(utils.AlignLeft) {
+						@components.H2("List example")
+						@components.P() {
+							Nisi incididunt qui reprehenderit sit excepteur elit.
+						}
+						@components.List(
+							"Velit occaecat enim enim eu mollit exercitation.",
+							"Exercitation adipisicing incididunt nisi ipsum tempor non culpa amet minim aliquip aliquip.",
+							"Eu labore aliquip aliquip laboris.",
+							"Eu irure in esse irure laboris esse irure.",
+							"Minim nostrud dolor amet fugiat ullamco reprehenderit.",
+						)
+					}
+				}
+				@components.Divider()
+				@components.Row() {
+					@components.ColHalf(utils.AlignLeft) {
+						@components.Row() {
+							@components.P() {
+								Filled button examples.
+							}
+						}
+						@components.Row() {
+							@components.ColFull(utils.AlignLeft) {
+								@components.Spacer()
+								@components.ButtonFilled(utils.AlignLeft, utils.Primary, "Button Primary", "https://example.com")
+							}
+						}
+						@components.Row() {
+							@components.ColFull(utils.AlignLeft) {
+								@components.Spacer()
+								@components.ButtonFilled(utils.AlignLeft, utils.Secondary, "Button Secondary", "https://example.com")
+							}
+						}
+						@components.Row() {
+							@components.ColFull(utils.AlignLeft) {
+								@components.Spacer()
+								@components.ButtonFilled(utils.AlignLeft, utils.Success, "Button Success", "https://example.com")
+							}
+						}
+						@components.Row() {
+							@components.ColFull(utils.AlignLeft) {
+								@components.Spacer()
+								@components.ButtonFilled(utils.AlignLeft, utils.Info, "Button Info", "https://example.com")
+							}
+						}
+						@components.Row() {
+							@components.ColFull(utils.AlignLeft) {
+								@components.Spacer()
+								@components.ButtonFilled(utils.AlignLeft, utils.Danger, "Button Danger", "https://example.com")
+							}
+						}
+						@components.Row() {
+							@components.ColFull(utils.AlignLeft) {
+								@components.Spacer()
+								@components.ButtonFilled(utils.AlignLeft, utils.Warning, "Button Warning", "https://example.com")
+							}
+						}
+					}
+					@components.ColHalf(utils.AlignLeft) {
+						@components.Row() {
+							@components.P() {
+								Outlined button examples.
+							}
+						}
+						@components.Row() {
+							@components.ColFull(utils.AlignLeft) {
+								@components.Spacer()
+								@components.ButtonOutlined(utils.AlignLeft, utils.Primary, "Button Primary", "https://example.com")
+							}
+						}
+						@components.Row() {
+							@components.ColFull(utils.AlignLeft) {
+								@components.Spacer()
+								@components.ButtonOutlined(utils.AlignLeft, utils.Secondary, "Button Secondary", "https://example.com")
+							}
+						}
+						@components.Row() {
+							@components.ColFull(utils.AlignLeft) {
+								@components.Spacer()
+								@components.ButtonOutlined(utils.AlignLeft, utils.Success, "Button Success", "https://example.com")
+							}
+						}
+						@components.Row() {
+							@components.ColFull(utils.AlignLeft) {
+								@components.Spacer()
+								@components.ButtonOutlined(utils.AlignLeft, utils.Info, "Button Info", "https://example.com")
+							}
+						}
+						@components.Row() {
+							@components.ColFull(utils.AlignLeft) {
+								@components.Spacer()
+								@components.ButtonOutlined(utils.AlignLeft, utils.Danger, "Button Danger", "https://example.com")
+							}
+						}
+						@components.Row() {
+							@components.ColFull(utils.AlignLeft) {
+								@components.Spacer()
+								@components.ButtonOutlined(utils.AlignLeft, utils.Warning, "Button Warning", "https://example.com")
+							}
+						}
+					}
+				}
+				@components.Spacer()
+				@components.Row() {
+					@components.ColFull(utils.AlignLeft) {
+						@components.P() {
+							Example of dashed coupon view.
+						}
+						@components.Coupon(components.CouponData{
+							DiscountPercent: 20,
+							Coupon:          "COUPONCODE",
+						})
+					}
+				}
+				@components.Row() {
+					@components.ColFull(utils.AlignLeft) {
+						@components.P() {
+							Example of coupon view with background.
+						}
+						@components.Discount(components.DiscountData{
+							Headline:      "This is a coupon headline",
+							Discount:      "$30",
+							ConditionText: "Valid until end of the month",
+							CTA: components.CTA{
+								Text: "Get your discount",
+								Link: "https://example.com",
+							},
+						})
+					}
+				}
+				@components.Divider()
+				@components.Row() {
+					@components.ColFull(utils.AlignLeft) {
+						@components.SecondaryText() {
+							Id labore laboris non deserunt et ad eiusmod incididunt. Proident eiusmod ut esse id mollit aliqua. Voluptate Lorem in reprehenderit eu ea.
+							@components.Link("", "http://soggy-stain.com?sfvsfa=234324&sfgsfs=srthstgserasdagarfwae.aefawefweGAEF.AEFAEWFWAEFGHTYJdgnsghbst35345&test=1")
+						}
+					}
+				}
+			}
+		}
+		@components.Wrapper() {
+			@components.Container(utils.Transparent) {
+				@components.Row() {
+					@components.ColFull(utils.AlignCenter) {
+						@components.SecondaryText() {
+							2024 
+							@components.Link("Company Name LLC", "https://example.com")
+							. All rights reserved.
+						}
+					}
+				}
+			}
+		}
+	}
+}
