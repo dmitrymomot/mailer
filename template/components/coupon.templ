@@ -2,49 +2,51 @@ package components
 
 import "fmt"
 
-type CouponDashedData struct {
+type CouponData struct {
 	DiscountPercent uint8
 	Coupon          string
-	CTA             struct {
-		Text    string
-		Link    string
-		SubText string
-	}
+	CTA             CTA
+}
+
+type CTA struct {
+	Text    string
+	Link    string
+	SubText string
 }
 
 // PercentStr returns the percent as a string
-func (d CouponDashedData) PercentStr() string {
+func (d CouponData) PercentStr() string {
 	return fmt.Sprintf("%d", d.DiscountPercent)
 }
 
-func (d CouponDashedData) CtaText() string {
+func (d CouponData) CtaText() string {
 	if d.CTA.Text == "" {
 		return "REDEEM COUPON"
 	}
 	return d.CTA.Text
 }
 
-func (d CouponDashedData) CtaLink() templ.SafeURL {
+func (d CouponData) CtaLink() templ.SafeURL {
 	if d.CTA.Link == "" {
 		return ""
 	}
 	return templ.URL(d.CTA.Link)
 }
 
-func (d CouponDashedData) CtaSubText() string {
+func (d CouponData) CtaSubText() string {
 	if d.CTA.SubText == "" {
 		return "With coupon"
 	}
 	return d.CTA.SubText
 }
 
-templ CouponDashed(data CouponDashedData) {
+templ Coupon(data CouponData) {
 	if data.DiscountPercent == 0 || data.Coupon == "" {
 		return
 	}
 	<table cellpadding="0" cellspacing="0" role="presentation" width="100%">
 		<tr>
-			<td style="padding: 0 32px;">
+			<td>
 				<table cellpadding="0" cellspacing="0" role="presentation" width="100%">
 					<tr>
 						<td class="col" align="center" width="100%">
@@ -53,7 +55,7 @@ templ CouponDashed(data CouponDashedData) {
 									<td class="spacer py-sm-16" height="32"></td>
 								</tr>
 								<tr>
-									<td class="px-sm-8" align="center" width="100%" style="padding: 32px; border: 4px dashed #CCCCCC; color: #000000;">
+									<td class="px-sm-8" align="center" width="100%" style="padding: 32px; border: 4px dashed #9ca3af; color: #000000;">
 										<table align="center" cellpadding="0" cellspacing="0" role="presentation" style="margin: 0 auto;">
 											<tr>
 												<th style="font-size: 96px; line-height: 100%; word-break: break-all;">{ data.PercentStr() }</th>

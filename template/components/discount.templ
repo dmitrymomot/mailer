@@ -2,48 +2,45 @@ package components
 
 import "fmt"
 
-type CouponFilledData struct {
+type DiscountData struct {
 	Headline      string
 	Discount      string
 	ConditionText string
-	CTA           struct {
-		Text string
-		Link string
-	}
+	CTA           CTA
 }
 
-func (c CouponFilledData) CtaLink() templ.SafeURL {
+func (c DiscountData) CtaLink() templ.SafeURL {
 	if c.CTA.Link == "" {
 		return ""
 	}
 	return templ.URL(c.CTA.Link)
 }
 
-func (c CouponFilledData) CtaText() string {
+func (c DiscountData) CtaText() string {
 	if c.CTA.Text == "" {
 		return "SHOP NOW"
 	}
 	return c.CTA.Text
 }
 
-func (c CouponFilledData) GetHeadline() string {
+func (c DiscountData) GetHeadline() string {
 	if c.Headline == "" {
 		return "Thanks for signing up!"
 	}
 	return c.Headline
 }
 
-func (c CouponFilledData) DiscountLine() string {
+func (c DiscountData) DiscountLine() string {
 	if c.Discount == "" {
 		return ""
 	}
 	return fmt.Sprintf("%s OFF", c.Discount)
 }
 
-templ CouponFilled(data CouponFilledData) {
+templ Discount(data DiscountData) {
 	<table cellpadding="0" cellspacing="0" role="presentation" width="100%">
 		<tr>
-			<td class="p-sm-16" bgcolor="#008DF6" width="100%" style="padding: 32px;">
+			<td class="p-sm-16" bgcolor="#6366f1" width="100%" style="padding: 32px;">
 				<table cellpadding="0" cellspacing="0" role="presentation" width="100%">
 					<tr>
 						<td class="col" align="center" width="100%" style="border: 1px solid #FFFFFF; color: #FFFFFF;">
@@ -62,7 +59,7 @@ templ CouponFilled(data CouponFilledData) {
 										<table cellpadding="0" cellspacing="0" role="presentation">
 											<tr>
 												<th bgcolor="#FFFFFF" style="mso-padding-alt: 6px 32px 12px;">
-													<a href={ data.CtaLink() } style="color: #008DF6; display: inline-block; font-size: 13px; line-height: 100%; padding: 12px 32px; text-decoration: none;">{ data.CtaText() }</a>
+													<a href={ data.CtaLink() } style="color: #6366f1; display: inline-block; font-size: 13px; line-height: 100%; padding: 12px 32px; text-decoration: none;">{ data.CtaText() }</a>
 												</th>
 											</tr>
 										</table>
