@@ -1,6 +1,6 @@
 package components
 
-import "github.com/dmitrymomot/mailer/template/components/utils"
+import "github.com/dmitrymomot/mailer/template/utils"
 import "fmt"
 
 templ ButtonFilled(align utils.Alignment, color utils.Color, buttonText, buttonLink string) {
@@ -32,5 +32,5 @@ func buttonOutlinedAttrs(color utils.Color) templ.Attributes {
 }
 
 func buttonOutlinedLinkAttrs(color utils.Color) templ.Attributes {
-	return templ.Attributes{"style": fmt.Sprintf("color: %s; display: inline-block; font-size: 13px; line-height: 100%; padding: 12px 42px; text-decoration: none;", color.String())}
+	return templ.Attributes{"style": fmt.Sprintf("color: %s; display: inline-block; font-size: 13px; line-height: 100%%; padding: 12px 42px; text-decoration: none;", color.String())}
 }
