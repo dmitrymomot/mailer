@@ -1,14 +1,14 @@
 package components
 
-templ H1() {
+templ H1(heading string) {
 	<h1>
-		{ children... }
+		{ heading }
 	</h1>
 }
 
-templ H2() {
+templ H2(heading string) {
 	<h2>
-		{ children... }
+		{ heading }
 	</h2>
 }
 
@@ -18,9 +18,19 @@ templ P() {
 	</p>
 }
 
+templ SecondaryText() {
+	<p style="font-size: 75%; line-height:150%; color: #6b7280;">
+		{ children... }
+	</p>
+}
+
 templ Link(text, url string) {
 	<a href={ templ.URL(url) }>
-		{ text }
+		if text == "" {
+			{ url }
+		} else {
+			{ text }
+		}
 	</a>
 }
 

@@ -1,0 +1,43 @@
+package components
+
+import "github.com/dmitrymomot/mailer/template/utils"
+
+templ Logo(fileURL string, link ...string) {
+	if len(link) > 0 {
+		@LogoImage(fileURL, "logo", link[0], "200px")
+	} else {
+		@LogoImage(fileURL, "logo", "#", "200px")
+	}
+}
+
+templ LogoImage(fileURL, altText, link, width string) {
+	@Row() {
+		@ColFull(utils.AlignCenter) {
+			if len(link) > 0 {
+				<a href={ templ.URL(link) } target="_blank" width={ width } align="center">
+					<img src={ fileURL } alt={ altText } width={ width }/>
+				</a>
+			} else {
+				<img src={ fileURL } alt={ altText } width={ width }/>
+			}
+		}
+	}
+}
+
+templ LogoText(text string, link ...string) {
+	@Row() {
+		@ColFull(utils.AlignCenter) {
+			if len(link) > 0 {
+				<a href={ templ.URL(link[0]) } target="_blank" align="center" style="text-decoration: none;">
+					@logoText(text)
+				</a>
+			} else {
+				@logoText(text)
+			}
+		}
+	}
+}
+
+templ logoText(text string) {
+	<h1 style="color:#6366f1;">{ text }</h1>
+}

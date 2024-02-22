@@ -1,5 +1,7 @@
 package components
 
+import "github.com/dmitrymomot/mailer/template/utils"
+
 templ Layout(lang, subject, previewText string) {
 	<!DOCTYPE html>
 	<html lang={ lang } xmlns:v="urn:schemas-microsoft-com:vml" xmlns:o="urn:schemas-microsoft-com:office:office">
@@ -129,14 +131,14 @@ templ Layout(lang, subject, previewText string) {
       }
     </style>
 		</head>
-		<body style="margin:0;padding:0;width:100%;word-break:break-word;-webkit-font-smoothing:antialiased;">
+		<body style="margin:0;padding:0;width:100%;word-break:break-word;-webkit-font-smoothing:antialiased;background-color:#f3f4f6;">
 			<div lang={ lang } style="display:none;">
 				{ previewText }
 			</div>
-			<table lang={ lang } bgcolor="#EEEEEE" cellpadding="16" cellspacing="0" role="presentation" width="100%">
+			<table lang={ lang } bgcolor={ utils.BgGray100.String() } cellpadding="16" cellspacing="0" role="presentation" width="100%">
 				<tr>
 					<td align="center">
-						<table class="container" bgcolor="#FFFFFF" cellpadding="0" cellspacing="0" role="presentation" width="600">
+						<table class="container" bgcolor={ utils.Transparent.String() } cellpadding="0" cellspacing="0" role="presentation" width="550">
 							<tr>
 								<td align="left">
 									{ children... }
