@@ -410,29 +410,6 @@ func ConfirmEmail(payload ConfirmEmailPayload) templ.Component {
 							if templ_7745c5c3_Err != nil {
 								return errtrace.Wrap(templ_7745c5c3_Err)
 							}
-							_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString(" ")
-							if templ_7745c5c3_Err != nil {
-								return errtrace.Wrap(templ_7745c5c3_Err)
-							}
-							templ_7745c5c3_Var25 := templ.ComponentFunc(func(ctx context.Context, templ_7745c5c3_W io.Writer) (templ_7745c5c3_Err error) {
-								templ_7745c5c3_Buffer, templ_7745c5c3_IsBuffer := templ_7745c5c3_W.(*bytes.Buffer)
-								if !templ_7745c5c3_IsBuffer {
-									templ_7745c5c3_Buffer = templ.GetBuffer()
-									defer templ.ReleaseBuffer(templ_7745c5c3_Buffer)
-								}
-								_, templ_7745c5c3_Err = templ_7745c5c3_Buffer.WriteString("Aliquip irure fugiat fugiat sit est id laboris commodo laboris do. Culpa ad mollit eu id ex aliquip elit esse dolor id esse amet dolor. Esse culpa laborum occaecat sint aliqua. Elit dolore culpa voluptate laborum officia sit laborum laborum aliquip est commodo qui. Commodo anim et commodo elit qui consectetur eiusmod ipsum culpa consequat veniam. Qui ullamco nostrud cupidatat eu duis Lorem velit amet est ex culpa sint ad qui. Excepteur duis nostrud duis consectetur dolore elit minim sint do et commodo.")
-								if templ_7745c5c3_Err != nil {
-									return errtrace.Wrap(templ_7745c5c3_Err)
-								}
-								if !templ_7745c5c3_IsBuffer {
-									_, templ_7745c5c3_Err = io.Copy(templ_7745c5c3_W, templ_7745c5c3_Buffer)
-								}
-								return errtrace.Wrap(templ_7745c5c3_Err)
-							})
-							templ_7745c5c3_Err = components.SecondaryText().Render(templ.WithChildren(ctx, templ_7745c5c3_Var25), templ_7745c5c3_Buffer)
-							if templ_7745c5c3_Err != nil {
-								return errtrace.Wrap(templ_7745c5c3_Err)
-							}
 							if !templ_7745c5c3_IsBuffer {
 								_, templ_7745c5c3_Err = io.Copy(templ_7745c5c3_W, templ_7745c5c3_Buffer)
 							}
