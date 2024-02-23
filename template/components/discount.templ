@@ -1,0 +1,75 @@
+package components
+
+import "fmt"
+
+type DiscountData struct {
+	Headline      string
+	Discount      string
+	ConditionText string
+	CTA           CTA
+}
+
+func (c DiscountData) CtaLink() templ.SafeURL {
+	if c.CTA.Link == "" {
+		return ""
+	}
+	return templ.URL(c.CTA.Link)
+}
+
+func (c DiscountData) CtaText() string {
+	if c.CTA.Text == "" {
+		return "SHOP NOW"
+	}
+	return c.CTA.Text
+}
+
+func (c DiscountData) GetHeadline() string {
+	if c.Headline == "" {
+		return "Thanks for signing up!"
+	}
+	return c.Headline
+}
+
+func (c DiscountData) DiscountLine() string {
+	if c.Discount == "" {
+		return ""
+	}
+	return fmt.Sprintf("%s OFF", c.Discount)
+}
+
+templ Discount(data DiscountData) {
+	<table cellpadding="0" cellspacing="0" role="presentation" width="100%">
+		<tr>
+			<td class="p-sm-16" bgcolor="#6366f1" width="100%" style="padding: 32px;">
+				<table cellpadding="0" cellspacing="0" role="presentation" width="100%">
+					<tr>
+						<td class="col" align="center" width="100%" style="border: 1px solid #FFFFFF; color: #FFFFFF;">
+							<table>
+								<tr>
+									<td class="p-sm-16" style="padding: 32px;">
+										<div style="font-size: 13px; text-transform: uppercase;">{ data.GetHeadline() }</div>
+										<div style="font-size: 72px; font-weight: 700; line-height: 100%;">
+											{ data.DiscountLine() }
+										</div>
+										<div class="spacer py-sm-8" style="line-height: 16px;">&zwnj;</div>
+										<div style="font-size: 20px; letter-spacing: 2px; line-height: 100%; text-transform: uppercase;">
+											@templ.Raw(data.ConditionText)
+										</div>
+										<div class="spacer py-sm-16" style="line-height: 32px;">&zwnj;</div>
+										<table cellpadding="0" cellspacing="0" role="presentation">
+											<tr>
+												<th bgcolor="#FFFFFF" style="mso-padding-alt: 6px 32px 12px;">
+													<a href={ data.CtaLink() } style="color: #6366f1; display: inline-block; font-size: 13px; line-height: 100%; padding: 12px 32px; text-decoration: none;">{ data.CtaText() }</a>
+												</th>
+											</tr>
+										</table>
+									</td>
+								</tr>
+							</table>
+						</td>
+					</tr>
+				</table>
+			</td>
+		</tr>
+	</table>
+}

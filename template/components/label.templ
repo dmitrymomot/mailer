@@ -1,0 +1,28 @@
+package components
+
+import "fmt"
+import "github.com/dmitrymomot/mailer/template/utils"
+
+templ LabelFilled(color utils.Color,text string) {
+	<span { labelFilledStyles(color)... }>
+		@templ.Raw(text)
+	</span>
+}
+
+func labelFilledStyles(color utils.Color) templ.Attributes {
+	return templ.Attributes{
+		"style": fmt.Sprintf("border-width: 2px 4px; mso-border-width-alt: 4px; border-style: solid; border-color: %[1]v; background-color: %[1]v; border-radius: 3px; color: #FFFFFF; font-size: 100%%; line-height: 100%%; mso-line-height-rule: exactly;", color.String()),
+	}
+}
+
+templ LabelOutlined(color utils.Color, text string) {
+	<span { labelOutlinedStyles(color)... }>
+		@templ.Raw(text)
+	</span>
+}
+
+func labelOutlinedStyles(color utils.Color) templ.Attributes {
+	return templ.Attributes{
+		"style": fmt.Sprintf("padding: 1px 4px; mso-padding-alt: 4px; border: 1px solid %[1]v; border-radius: 3px; color: %[1]v; font-size: 75%%; line-height: 100%%; mso-line-height-rule: exactly;", color.String()),
+	}
+}

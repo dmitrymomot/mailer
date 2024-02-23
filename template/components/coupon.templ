@@ -1,0 +1,90 @@
+package components
+
+import "fmt"
+
+type CouponData struct {
+	DiscountPercent uint8
+	Coupon          string
+	CTA             CTA
+}
+
+type CTA struct {
+	Text    string
+	Link    string
+	SubText string
+}
+
+// PercentStr returns the percent as a string
+func (d CouponData) PercentStr() string {
+	return fmt.Sprintf("%d", d.DiscountPercent)
+}
+
+func (d CouponData) CtaText() string {
+	if d.CTA.Text == "" {
+		return "REDEEM COUPON"
+	}
+	return d.CTA.Text
+}
+
+func (d CouponData) CtaLink() templ.SafeURL {
+	if d.CTA.Link == "" {
+		return ""
+	}
+	return templ.URL(d.CTA.Link)
+}
+
+func (d CouponData) CtaSubText() string {
+	if d.CTA.SubText == "" {
+		return "With coupon"
+	}
+	return d.CTA.SubText
+}
+
+templ Coupon(data CouponData) {
+	if data.DiscountPercent == 0 || data.Coupon == "" {
+		return
+	}
+	<table cellpadding="0" cellspacing="0" role="presentation" width="100%">
+		<tr>
+			<td>
+				<table cellpadding="0" cellspacing="0" role="presentation" width="100%">
+					<tr>
+						<td class="col" align="center" width="100%">
+							<table cellpadding="0" cellspacing="0" role="presentation" width="100%">
+								<tr>
+									<td class="spacer py-sm-16" height="32"></td>
+								</tr>
+								<tr>
+									<td class="px-sm-8" align="center" width="100%" style="padding: 32px; border: 4px dashed #9ca3af; color: #000000;">
+										<table align="center" cellpadding="0" cellspacing="0" role="presentation" style="margin: 0 auto;">
+											<tr>
+												<th style="font-size: 96px; line-height: 100%; word-break: break-all;">{ data.PercentStr() }</th>
+												<th style="vertical-align: middle;">
+													<div style="font-size: 48px; line-height: 48px;">%</div>
+													<div style="font-size: 32px; line-height: 32px; mso-line-height-rule: exactly; mso-text-raise: 2px;">OFF</div>
+												</th>
+											</tr>
+										</table>
+										<div style="color: #999999;">{ data.CtaSubText() } <span style="border: 1px solid #EA4B35; border-radius: 3px; color: #EA4B35; display: inline-block; font-size: 90%; padding: 1px 5px;">{ data.Coupon }</span></div>
+										<div class="spacer py-sm-16" style="line-height: 32px;">&zwnj;</div>
+										<table cellpadding="0" cellspacing="0" role="presentation">
+											<tr>
+												<th bgcolor="#000000" style="mso-padding-alt: 6px 32px 12px;">
+													<a href={ data.CtaLink() } style="color: #FFFFFF; display: inline-block; font-size: 13px; line-height: 100%; padding: 12px 32px; text-decoration: none;">{ data.CtaText() } &rarr;</a>
+												</th>
+											</tr>
+										</table>
+										<div class="spacer py-sm-8" style="line-height: 16px;">&zwnj;</div>
+									</td>
+								</tr>
+								<tr>
+									<td class="spacer py-sm-16" height="32"></td>
+								</tr>
+							</table>
+						</td>
+					</tr>
+				</table>
+			</td>
+		</tr>
+	</table>
+}

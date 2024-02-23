@@ -1,0 +1,53 @@
+package components
+
+import "github.com/dmitrymomot/mailer/template/utils"
+
+templ Row() {
+	<table cellpadding="0" cellspacing="0" role="presentation" width="100%">
+		<tr>
+			<td style="padding: 0 24px;">
+				<table cellpadding="0" cellspacing="0" role="presentation" width="100%">
+					<tr>
+						{ children... }
+					</tr>
+				</table>
+			</td>
+		</tr>
+	</table>
+}
+
+templ ColFull(align utils.Alignment) {
+	<td class="col" width="100%" align={ align.String() }>
+		{ children... }
+	</td>
+}
+
+templ ColHalf(align utils.Alignment) {
+	@Col2of4(align) {
+		{ children... }
+	}
+}
+
+templ Col1of4(align utils.Alignment) {
+	<td class="col" width="138" align={ align.String() }>
+		{ children... }
+	</td>
+}
+
+templ Col2of4(align utils.Alignment) {
+	<td class="col" width="276" align={ align.String() }>
+		{ children... }
+	</td>
+}
+
+templ Col3of4(align utils.Alignment) {
+	<td class="col" width="414" align={ align.String() }>
+		{ children... }
+	</td>
+}
+
+templ Col1of3(align utils.Alignment) {
+	<td class="col" width="184" align={ align.String() }>
+		{ children... }
+	</td>
+}

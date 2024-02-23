@@ -12,6 +12,13 @@
 
 Mailer is an email queue processor that exemplifies provider-agnostic versatility in its design. It's a robust and scalable system tailored for efficient email handling in distributed environments. While maintaining a neutral stance towards various email providers ensuring adaptability and flexibility, Mailer includes a basic adapter implementation for the Postmarkapp email service that can be an example for your implementations or help you to start quickly.
 
+## Features
+
+- **Provider-agnostic**: Mailer is designed to be provider-agnostic, meaning it can be used with any email service provider.
+- **Scalable**: Mailer is built to be scalable, allowing you to handle a large number of emails.
+- **Email Templates**: Mailer provides a ready-to-use template system for email messages based on [Arcon Framework](http://docs.thememountain.com/acorn/introduction/)
+- **Email Queue**: Mailer provides a ready-to-use queue system for email messages. It allows you to send emails in the background.
+
 ## Usage
 
 See the [_example](https://github.com/dmitrymomot/mailer/tree/main/_example) directory for usage examples.

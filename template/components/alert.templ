@@ -1,0 +1,32 @@
+package components
+
+import "github.com/dmitrymomot/mailer/template/utils"
+import "fmt"
+
+templ AlertBg(color utils.Color) {
+	<table cellpadding="0" cellspacing="0" role="presentation" width="100%">
+		<tr>
+			<td bgcolor={ color.String() } style="color: #FFFFFF; padding: 16px 32px;">
+				{ children... }
+			</td>
+		</tr>
+	</table>
+}
+
+templ AlertOutlined(color utils.Color) {
+	<table cellpadding="0" cellspacing="0" role="presentation" width="100%" { tableAttr(color)... }>
+		<tr>
+			<td { cellAttr(color)... }>
+				{ children... }
+			</td>
+		</tr>
+	</table>
+}
+
+func tableAttr(color utils.Color) templ.Attributes {
+	return templ.Attributes{"style": fmt.Sprintf("border: 2px solid %s;", color.String())}
+}
+
+func cellAttr(color utils.Color) templ.Attributes {
+	return templ.Attributes{"style": fmt.Sprintf("color: %s; padding: 16px 32px;", color.String())}
+}

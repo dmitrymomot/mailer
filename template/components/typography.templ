@@ -1,0 +1,49 @@
+package components
+
+templ H1(heading string) {
+	<h1>
+		{ heading }
+	</h1>
+}
+
+templ H2(heading string) {
+	<h2>
+		{ heading }
+	</h2>
+}
+
+templ P() {
+	<p>
+		{ children... }
+	</p>
+}
+
+templ SecondaryText() {
+	<p style="font-size: 75%; line-height:150%; color: #6b7280;">
+		{ children... }
+	</p>
+}
+
+templ Link(text, url string) {
+	<a href={ templ.URL(url) }>
+		if text == "" {
+			{ url }
+		} else {
+			{ text }
+		}
+	</a>
+}
+
+templ List(items ...string) {
+	<ul>
+		for _, item := range items {
+			<li>
+				@templ.Raw(item)
+			</li>
+		}
+	</ul>
+}
+
+templ Image(fileURL, altText string) {
+	<img src={ fileURL } alt={ altText }/>
+}
